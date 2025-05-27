@@ -68,6 +68,20 @@
         .booking-link:hover {
             background-color: #059669; /* emerald-600 */
         }
+        .route-link {
+            display: inline-block;
+            background-color: #F97316; /* orange-500 */
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 0.375rem;
+            text-decoration: none;
+            font-weight: 500;
+            margin-top: 1rem;
+            transition: background-color 0.3s;
+        }
+        .route-link:hover {
+            background-color: #EA580C; /* orange-600 */
+        }
     </style>
 </head>
 <body class="bg-stone-100 text-stone-800">
@@ -276,7 +290,7 @@
     </main>
 
     <footer class="text-center p-4 text-stone-600 text-sm border-t border-stone-200 mt-8">
-        <p>&copy; 紐西蘭露營車互動行程。祝您旅途愉快！</p>
+        <p>© 紐西蘭露營車互動行程。祝您旅途愉快！</p>
     </footer>
 
     <script>
@@ -295,7 +309,8 @@
                     <p class="mb-3">在 <a href="https://www.google.com/maps/search/Auckland" target="_blank" class="map-link">奧克蘭</a> 找個露營地或假日公園安頓下來，開始體驗露營車生活！</p>
                     <h4 class="text-lg font-semibold text-stone-700 mb-2">露營車小撇步：</h4>
                     <p>第一次開露營車可能會有點不習慣，最好白天多練習一下，安全第一！</p>
-                `
+                `,
+                routeMapLink: null
             },
             {
                 day: 2,
@@ -310,7 +325,8 @@
                     </ul>
                     <h4 class="text-lg font-semibold text-stone-700 mb-2">住宿：</h4>
                     <p class="mb-3"><a href="https://www.google.com/maps/search/Rotorua" target="_blank" class="map-link">羅托魯瓦</a> 的露營地或假日公園。</p>
-                `
+                `,
+                routeMapLink: "https://www.google.com/maps/dir/?api=1&origin=Auckland&destination=Rotorua&waypoints=Matamata"
             },
             {
                 day: 3,
@@ -326,7 +342,8 @@
                     <p class="mb-3"><a href="https://www.google.com/maps/search/Wellington" target="_blank" class="map-link">威靈頓</a> 附近的露營地或假日公園。</p>
                     <h4 class="text-lg font-semibold text-stone-700 mb-2">露營車小撇步：</h4>
                     <p>長途跋涉前，記得檢查油量和露營車的各種設備！</p>
-                `
+                `,
+                routeMapLink: "https://www.google.com/maps/dir/?api=1&origin=Rotorua&destination=Wellington&waypoints=Taupo"
             },
             {
                 day: 4,
@@ -341,7 +358,8 @@
                     <p class="mb-3"><a href="https://www.google.com/maps/search/Christchurch" target="_blank" class="map-link">基督城</a> 的露營地或假日公園。</p>
                     <h4 class="text-lg font-semibold text-stone-700 mb-2">行程提示：</h4>
                     <p>這天開車時間會比較久，記得多休息！</p>
-                `
+                `,
+                routeMapLink: "https://www.google.com/maps/dir/?api=1&origin=Wellington+Ferry+Terminal&destination=Christchurch&waypoints=Picton+Ferry+Terminal|Kaikoura"
             },
             {
                 day: 5,
@@ -352,11 +370,12 @@
                         <li>上午：從 <a href="https://www.google.com/maps/search/Christchurch" target="_blank" class="map-link">基督城</a> 出發，前往南島的中心地帶。</li>
                         <li>中午：抵達 <a href="https://www.google.com/maps/search/Lake+Tekapo" target="_blank" class="map-link">蒂卡波湖 (Lake Tekapo)</a>，那湖水藍得像牛奶一樣！別忘了去 <a href="https://www.google.com/maps/search/Church+of+the+Good+Shepherd" target="_blank" class="map-link">好牧羊人教堂</a> 拍張照。</li>
                         <li>下午：可以在湖邊放鬆一下，或者繼續開到 <a href="https://www.google.com/maps/search/Mount+Cook+National+Park" target="_blank" class="map-link">庫克山國家公園 (Mount Cook National Park)</a>。</li>
-                        <li>傍晚：如果天氣好，<a href="https://www.google.com/maps/search/Lake+Tekapo" target="_blank" class="map-link">蒂卡波湖</a> 或 <a href="https://www.google.com/maps/search/Mount+Cook+National+Park" target="_blank" class="map-link">庫克山</a> 是看星星的絕佳地點！</li>
+                        <li>傍晚：如果天氣好，<a href="https://www.google.com/maps/search/Lake+Tekapo" target="_blank" class="map-link">蒂卡波湖</a> 或 <a href="https://www.google.com/maps/search/Mount+Cook+National+Kaikoura" target="_blank" class="map-link">庫克山</a> 是看星星的絕佳地點！</li>
                     </ul>
                     <h4 class="text-lg font-semibold text-stone-700 mb-2">住宿：</h4>
                     <p class="mb-3"><a href="https://www.google.com/maps/search/Lake+Tekapo" target="_blank" class="map-link">蒂卡波湖</a> 或 <a href="https://www.google.com/maps/search/Mount+Cook+National+Kaikoura" target="_blank" class="map-link">庫克山</a> 附近的露營地。</p>
-                `
+                `,
+                routeMapLink: "https://www.google.com/maps/dir/?api=1&origin=Christchurch&destination=Mount+Cook+National+Park&waypoints=Lake+Tekapo"
             },
             {
                 day: 6,
@@ -370,7 +389,8 @@
                     </ul>
                     <h4 class="text-lg font-semibold text-stone-700 mb-2">住宿：</h4>
                     <p class="mb-3"><a href="https://www.google.com/maps/search/Queenstown" target="_blank" class="map-link">皇后鎮</a> 露營地或假日公園。</p>
-                `
+                `,
+                routeMapLink: "https://www.google.com/maps/dir/?api=1&origin=Mount+Cook+National+Park&destination=Queenstown&waypoints=Wanaka"
             },
             {
                 day: 7,
@@ -391,7 +411,8 @@
                     </ul>
                     <h4 class="text-lg font-semibold text-stone-700 mb-2">住宿：</h4>
                     <p class="mb-3"><a href="https://www.google.com/maps/search/Queenstown" target="_blank" class="map-link">皇后鎮</a> 露營地或假日公園。</p>
-                `
+                `,
+                routeMapLink: null
             },
             {
                 day: 8,
@@ -405,7 +426,8 @@
                     </ul>
                     <h4 class="text-lg font-semibold text-stone-700 mb-2">住宿：</h4>
                     <p class="mb-3"><a href="https://www.google.com/maps/search/Te+Anau" target="_blank" class="map-link">蒂阿瑙</a> 露營地或假日公園。</p>
-                `
+                `,
+                routeMapLink: "https://www.google.com/maps/dir/?api=1&origin=Queenstown&destination=Te+Anau"
             },
             {
                 day: 9,
@@ -419,7 +441,8 @@
                     </ul>
                     <h4 class="text-lg font-semibold text-stone-700 mb-2">住宿：</h4>
                     <p class="mb-3"><a href="https://www.google.com/maps/search/Te+Anau" target="_blank" class="map-link">蒂阿瑙</a> 露營地或假日公園。</p>
-                `
+                `,
+                routeMapLink: "https://www.google.com/maps/dir/?api=1&origin=Te+Anau&destination=Te+Anau&waypoints=Milford+Sound"
             },
             {
                 day: 10,
@@ -435,7 +458,8 @@
                     </ul>
                     <h4 class="text-lg font-semibold text-stone-700 mb-2">住宿：</h4>
                     <p class="mb-3">冰川小鎮的露營地或假日公園。</p>
-                `
+                `,
+                routeMapLink: "https://www.google.com/maps/dir/?api=1&origin=Te+Anau&destination=Franz+Josef+Glacier&waypoints=Wanaka|Fox+Glacier"
             },
             {
                 day: 11,
@@ -448,7 +472,8 @@
                     </ul>
                     <h4 class="text-lg font-semibold text-stone-700 mb-2">住宿：</h4>
                     <p class="mb-3"><a href="https://www.google.com/maps/search/Christchurch" target="_blank" class="map-link">基督城</a> 露營地或假日公園。</p>
-                `
+                `,
+                routeMapLink: "https://www.google.com/maps/dir/?api=1&origin=Franz+Josef+Glacier&destination=Christchurch&waypoints=Arthur's+Pass"
             },
             {
                 day: 12,
@@ -459,7 +484,8 @@
                         <li>上午：在 <a href="https://www.google.com/maps/search/Christchurch" target="_blank" class="map-link">基督城</a> 的還車點把露營車還了，記得加滿油，然後清理乾淨喔！</li>
                         <li>中午/下午：去 <a href="https://www.google.com/maps/search/Christchurch+International+Airport" target="_blank" class="map-link">基督城國際機場 (CHC)</a>，搭飛機回家啦！紐西蘭掰掰！</li>
                     </ul>
-                `
+                `,
+                routeMapLink: null
             }
         ];
 
@@ -493,10 +519,15 @@
         });
 
         function displayDayContent(dayData) {
+            let routeLinkHtml = '';
+            if (dayData.routeMapLink) {
+                routeLinkHtml = `<a href="${dayData.routeMapLink}" target="_blank" class="route-link">顯示當日地圖路線</a>`;
+            }
             dailyContentContainer.innerHTML = `
                 <div class="p-4 border border-stone-200 rounded-lg bg-stone-50">
                     <h3 class="text-xl font-bold text-teal-600 mb-3">第 ${dayData.day} 天：${dayData.title}</h3>
                     ${dayData.content}
+                    ${routeLinkHtml}
                 </div>
             `;
         }
