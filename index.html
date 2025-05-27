@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>紐西蘭 12 天露營車趴趴走！SPA</title>
+    <title id="appTitle">紐西蘭 12 天露營車趴趴走！SPA</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         body {
@@ -16,24 +16,23 @@
             display: block;
         }
         .tab-button.active {
-            background-color: #0D9488; /* teal-600 */
+            background-color: #047857; /* emerald-700 darker for active */
             color: white;
         }
         .day-button.active {
-            background-color: #14B8A6; /* teal-500 */
+            background-color: #059669; /* emerald-600 */
             color: white;
-            border-color: #0D9488;
+            border-color: #047857;
         }
-        /* Basic styling for scrollbar, more advanced styling might need JS or non-Tailwind CSS */
         .horizontal-scroll::-webkit-scrollbar {
             height: 8px;
         }
         .horizontal-scroll::-webkit-scrollbar-thumb {
-            background: #9CA3AF; /* gray-400 */
+            background: #A3A3A3; /* stone-400 */
             border-radius: 4px;
         }
         .horizontal-scroll::-webkit-scrollbar-track {
-            background: #F3F4F6; /* gray-100 */
+            background: #F5F5F4; /* stone-100 */
         }
         .content-card {
             background-color: white;
@@ -44,7 +43,7 @@
         }
         .map-link {
             display: inline-block;
-            background-color: #3B82F6; /* blue-500 */
+            background-color: #2563EB; /* blue-600 */
             color: white;
             padding: 0.25rem 0.75rem;
             border-radius: 0.375rem;
@@ -53,11 +52,11 @@
             transition: background-color 0.3s;
         }
         .map-link:hover {
-            background-color: #2563EB; /* blue-600 */
+            background-color: #1D4ED8; /* blue-700 */
         }
         .booking-link {
             display: inline-block;
-            background-color: #10B981; /* emerald-500 */
+            background-color: #059669; /* green-600 */
             color: white;
             padding: 0.5rem 1rem;
             border-radius: 0.375rem;
@@ -66,11 +65,11 @@
             transition: background-color 0.3s;
         }
         .booking-link:hover {
-            background-color: #059669; /* emerald-600 */
+            background-color: #047857; /* green-700 */
         }
         .route-link {
             display: inline-block;
-            background-color: #F97316; /* orange-500 */
+            background-color: #EA580C; /* orange-600 */
             color: white;
             padding: 0.5rem 1rem;
             border-radius: 0.375rem;
@@ -80,23 +79,27 @@
             transition: background-color 0.3s;
         }
         .route-link:hover {
-            background-color: #EA580C; /* orange-600 */
+            background-color: #C2410C; /* orange-700 */
         }
     </style>
 </head>
 <body class="bg-stone-100 text-stone-800">
 
-    <header class="bg-teal-700 text-white p-6 shadow-md">
-        <h1 class="text-3xl font-bold text-center">紐西蘭 12 天露營車趴趴走！互動行程</h1>
+    <header class="bg-emerald-700 text-white p-6 shadow-md flex justify-between items-center">
+        <h1 id="headerTitle" class="text-3xl font-bold">紐西蘭 12 天露營車趴趴走！互動行程</h1>
+        <div class="flex space-x-2">
+            <button id="langZh" class="py-2 px-4 rounded-md bg-emerald-600 hover:bg-emerald-500 transition duration-300 text-sm">繁體中文</button>
+            <button id="langEn" class="py-2 px-4 rounded-md bg-emerald-600 hover:bg-emerald-500 transition duration-300 text-sm">English</button>
+        </div>
     </header>
 
-    <nav class="bg-teal-600 text-white sticky top-0 z-50 shadow">
+    <nav class="bg-emerald-600 text-white sticky top-0 z-50 shadow">
         <div class="container mx-auto px-4">
             <div class="flex justify-around items-center">
-                <button data-target="overview" class="tab-button py-4 px-2 md:px-6 hover:bg-teal-500 transition duration-300 active">行程總覽</button>
-                <button data-target="daily-plan" class="tab-button py-4 px-2 md:px-6 hover:bg-teal-500 transition duration-300">每日計劃</button>
-                <button data-target="budget" class="tab-button py-4 px-2 md:px-6 hover:bg-teal-500 transition duration-300">預算與預訂</button>
-                <button data-target="campervan-info" class="tab-button py-4 px-2 md:px-6 hover:bg-teal-500 transition duration-300">露營車資訊</button>
+                <button data-target="overview" class="tab-button py-4 px-2 md:px-6 hover:bg-emerald-500 transition duration-300 active" id="navOverview">行程總覽</button>
+                <button data-target="daily-plan" class="tab-button py-4 px-2 md:px-6 hover:bg-emerald-500 transition duration-300" id="navDailyPlan">每日計劃</button>
+                <button data-target="budget" class="tab-button py-4 px-2 md:px-6 hover:bg-emerald-500 transition duration-300" id="navBudget">預算與預訂</button>
+                <button data-target="campervan-info" class="tab-button py-4 px-2 md:px-6 hover:bg-emerald-500 transition duration-300" id="navCampervanInfo">露營車資訊</button>
             </div>
         </div>
     </nav>
@@ -104,26 +107,26 @@
     <main class="container mx-auto p-4 md:p-8">
         <section id="overview" class="section active">
             <div class="content-card">
-                <h2 class="text-2xl font-semibold text-teal-700 mb-4">歡迎來到您的紐西蘭冒險！</h2>
-                <p class="mb-4">這是一個為期 12 天的紐西蘭露營車自駕行程，專為熱愛自由、探索魔戒奇幻場景、挑戰極限運動並沉醉於壯麗自然風光的您所設計。本互動行程將引導您輕鬆規劃這趟精彩旅程，從北島的地熱奇觀到南島的冰川峽灣，每一天都充滿驚喜！</p>
-                <p class="mb-4">您可以透過上方的導覽列切換不同主題，深入了解每日的詳細安排、預算規劃、重要景點的預訂方式，以及實用的露營車自駕小撇步。準備好，就讓我們一起開始探索這趟史詩級的紐西蘭之旅吧！</p>
+                <h2 id="overviewTitle" class="text-2xl font-semibold text-emerald-700 mb-4">歡迎來到您的紐西蘭冒險！</h2>
+                <p id="overviewText1" class="mb-4">這是一個為期 12 天的紐西蘭露營車自駕行程，專為熱愛自由、探索魔戒奇幻場景、挑戰極限運動並沉醉於壯麗自然風光的您所設計。本互動行程將引導您輕鬆規劃這趟精彩旅程，從北島的地熱奇觀到南島的冰川峽灣，每一天都充滿驚喜！</p>
+                <p id="overviewText2" class="mb-4">您可以透過上方的導覽列切換不同主題，深入了解每日的詳細安排、預算規劃、重要景點的預訂方式，以及實用的露營車自駕小撇步。準備好，就讓我們一起開始探索這趟史詩級的紐西蘭之旅吧！</p>
                 
-                <h3 class="text-xl font-semibold text-teal-600 mt-6 mb-3">行程亮點：</h3>
+                <h3 id="highlightsTitle" class="text-xl font-semibold text-emerald-600 mt-6 mb-3">行程亮點：</h3>
                 <ul class="list-disc list-inside space-y-2 mb-4">
-                    <li>🚐 **露營車自駕**：想去哪就去哪，超彈性！</li>
-                    <li>🧙‍♂️ **魔戒迷必去**：哈比屯，根本走進電影裡！</li>
-                    <li>🤸 **高空彈跳**：心臟夠大顆就來跳！皇后鎮等你！</li>
-                    <li>🏞️ **美到爆的自然風光**：冰川、峽灣、火山，啥都有！</li>
-                    <li>🗿 **在地文化體驗**：感受毛利人的熱情！</li>
+                    <li id="highlight1">🚐 **露營車自駕**：想去哪就去哪，超彈性！</li>
+                    <li id="highlight2">🧙‍♂️ **魔戒迷必去**：哈比屯，根本走進電影裡！</li>
+                    <li id="highlight3">🤸 **高空彈跳**：心臟夠大顆就來跳！皇后鎮等你！</li>
+                    <li id="highlight4">🏞️ **美到爆的自然風光**：冰川、峽灣、火山，啥都有！</li>
+                    <li id="highlight5">🗿 **在地文化體驗**：感受毛利人的熱情！</li>
                 </ul>
-                <p class="text-sm text-stone-600">點擊上方「每日計劃」開始查看詳細行程，或探索其他分頁獲取更多實用資訊。</p>
+                <p id="overviewCta" class="text-sm text-stone-600">點擊上方「每日計劃」開始查看詳細行程，或探索其他分頁獲取更多實用資訊。</p>
             </div>
         </section>
 
         <section id="daily-plan" class="section">
             <div class="content-card">
-                <h2 class="text-2xl font-semibold text-teal-700 mb-4">每日行程細節</h2>
-                <p class="mb-6">這裡是您 12 天紐西蘭冒險的每日行程規劃。點擊下方的日期按鈕，即可查看當天的詳細活動、住宿建議、注意事項以及相關的門票和地圖連結。讓您輕鬆掌握每一天的精彩！</p>
+                <h2 id="dailyPlanTitle" class="text-2xl font-semibold text-emerald-700 mb-4">每日行程細節</h2>
+                <p id="dailyPlanIntro" class="mb-6">這裡是您 12 天紐西蘭冒險的每日行程規劃。點擊下方的日期按鈕，即可查看當天的詳細活動、住宿建議、注意事項以及相關的門票和地圖連結。讓您輕鬆掌握每一天的精彩！</p>
                 <div class="mb-6 overflow-x-auto horizontal-scroll pb-2">
                     <div id="day-selector" class="flex space-x-2 whitespace-nowrap">
                         </div>
@@ -135,100 +138,37 @@
 
         <section id="budget" class="section">
             <div class="content-card">
-                <h2 class="text-2xl font-semibold text-teal-700 mb-4">總結 & 大概花費</h2>
-                <p class="mb-4">這份 12 天的紐西蘭露營車自駕行程，涵蓋了北島的魔戒奇幻與地熱景觀，以及南島的極限冒險與壯麗自然風光。行程緊湊但豐富，讓您在有限的時間內體驗紐西蘭的精華。</p>
-                <p class="mb-6">以下為行程中提及的主要門票和活動的預估費用（每人，單位：美元）。請注意，這些價格僅供參考，實際費用可能因季節、預訂時間及供應商而有所不同。</p>
+                <h2 id="budgetTitle" class="text-2xl font-semibold text-emerald-700 mb-4">總結 & 大概花費</h2>
+                <p id="budgetIntro1" class="mb-4">這份 12 天的紐西蘭露營車自駕行程，涵蓋了北島的魔戒奇幻與地熱景觀，以及南島的極限冒險與壯麗自然風光。行程緊湊但豐富，讓您在有限的時間內體驗紐西蘭的精華。</p>
+                <p id="budgetIntro2" class="mb-6">以下為行程中提及的主要門票和活動的預估費用（每人，單位：美元）。請注意，這些價格僅供參考，實際費用可能因季節、預訂時間及供應商而有所不同。</p>
                 
                 <div class="overflow-x-auto">
                     <table class="min-w-full bg-white border border-stone-300 rounded-lg">
-                        <thead class="bg-teal-50">
+                        <thead class="bg-emerald-50">
                             <tr>
-                                <th class="text-left py-3 px-4 font-semibold text-teal-700">活動名稱</th>
-                                <th class="text-right py-3 px-4 font-semibold text-teal-700">大概價格 (USD)</th>
-                                <th class="text-left py-3 px-4 font-semibold text-teal-700">官方預訂網站</th>
+                                <th id="tableHeaderActivity" class="text-left py-3 px-4 font-semibold text-emerald-700">活動名稱</th>
+                                <th id="tableHeaderPrice" class="text-right py-3 px-4 font-semibold text-emerald-700">大概價格 (USD)</th>
+                                <th id="tableHeaderBooking" class="text-left py-3 px-4 font-semibold text-emerald-700">官方預訂網站</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr class="border-b border-stone-200">
-                                <td class="py-3 px-4">哈比屯電影場景</td>
-                                <td class="py-3 px-4 text-right">$72.00</td>
-                                <td class="py-3 px-4"><a href="https://www.hobbitontours.com/" target="_blank" class="booking-link">前往預訂</a></td>
-                            </tr>
-                            <tr class="border-b border-stone-200 bg-stone-50">
-                                <td class="py-3 px-4">蒂普亞毛利文化村</td>
-                                <td class="py-3 px-4 text-right">$60.00</td>
-                                <td class="py-3 px-4"><a href="http://www.tepuia.com/new-zealand/" target="_blank" class="booking-link">前往預訂</a></td>
-                            </tr>
-                            <tr class="border-b border-stone-200">
-                                <td class="py-3 px-4">懷奧塔普地熱世界</td>
-                                <td class="py-3 px-4 text-right">$27.00</td>
-                                <td class="py-3 px-4"><a href="https://www.waiotapu.co.nz/" target="_blank" class="booking-link">前往預訂</a></td>
-                            </tr>
-                            <tr class="border-b border-stone-200 bg-stone-50">
-                                <td class="py-3 px-4">跨島渡輪 (Interislander)</td>
-                                <td class="py-3 px-4 text-right">(依車輛/人數而異)</td>
-                                <td class="py-3 px-4"><a href="https://www.interislander.co.nz/" target="_blank" class="booking-link">前往預訂</a></td>
-                            </tr>
-                             <tr class="border-b border-stone-200">
-                                <td class="py-3 px-4">觀鯨之旅 (Kaikoura)</td>
-                                <td class="py-3 px-4 text-right">$105.00</td>
-                                <td class="py-3 px-4"><a href="https://whalewatch.co.nz/" target="_blank" class="booking-link">前往預訂</a></td>
-                            </tr>
-                            <tr class="border-b border-stone-200 bg-stone-50">
-                                <td class="py-3 px-4">皇后鎮尼維斯高空彈跳</td>
-                                <td class="py-3 px-4 text-right">$237.00</td>
-                                <td class="py-3 px-4"><a href="https://www.bungy.co.nz/queenstown/" target="_blank" class="booking-link">前往預訂</a></td>
-                            </tr>
-                            <tr class="border-b border-stone-200">
-                                <td class="py-3 px-4">皇后鎮噴射快艇</td>
-                                <td class="py-3 px-4 text-right">$101.40</td>
-                                <td class="py-3 px-4"><a href="https://www.shotoverjet.com/" target="_blank" class="booking-link">前往預訂</a></td>
-                            </tr>
-                            <tr class="border-b border-stone-200 bg-stone-50">
-                                <td class="py-3 px-4">皇后鎮滑翔傘</td>
-                                <td class="py-3 px-4 text-right">$221.40</td>
-                                <td class="py-3 px-4"><a href="https://www.skytrek.co.nz/" target="_blank" class="booking-link">前往預訂</a></td>
-                            </tr>
-                            <tr class="border-b border-stone-200">
-                                <td class="py-3 px-4">皇后鎮天空纜車及滑板車</td>
-                                <td class="py-3 px-4 text-right">$31.20 (纜車) + $69.00 (滑板車)</td>
-                                <td class="py-3 px-4"><a href="https://queenstown.skyline.co.nz/" target="_blank" class="booking-link">前往預訂</a></td>
-                            </tr>
-                            <tr class="border-b border-stone-200 bg-stone-50">
-                                <td class="py-3 px-4">蒂阿瑙螢火蟲洞</td>
-                                <td class="py-3 px-4 text-right">$81.00</td>
-                                <td class="py-3 px-4"><a href="https://www.realnz.com/en/experiences/glowworm-caves/te-anau-glowworm-caves/" target="_blank" class="booking-link">前往預訂</a></td>
-                            </tr>
-                            <tr class="border-b border-stone-200">
-                                <td class="py-3 px-4">米爾福德峽灣遊船</td>
-                                <td class="py-3 px-4 text-right">$105.00</td>
-                                <td class="py-3 px-4"><a href="https://www.southerndiscoveries.co.nz/" target="_blank" class="booking-link">前往預訂</a></td>
-                            </tr>
-                            <tr class="bg-stone-50">
-                                <td class="py-3 px-4">冰川直升機降落 (擇一)</td>
-                                <td class="py-3 px-4 text-right">$477.00</td>
-                                <td class="py-3 px-4">
-                                    <a href="https://www.franzjosefglacier.com/" target="_blank" class="booking-link mr-2">弗朗茲約瑟夫</a>
-                                    <a href="https://www.foxguides.co.nz/" target="_blank" class="booking-link">福克斯</a>
-                                </td>
-                            </tr>
-                        </tbody>
+                        <tbody id="budgetTableBody">
+                            </tbody>
                         <tfoot>
-                            <tr class="bg-teal-100">
-                                <td class="py-3 px-4 font-bold text-teal-800">總計活動費用 (預估)</td>
-                                <td class="py-3 px-4 text-right font-bold text-teal-800">約 $1482.00</td>
-                                <td class="py-3 px-4 text-teal-800">(假設選擇最高價項目)</td>
+                            <tr class="bg-emerald-100">
+                                <td id="totalActivityCostLabel" class="py-3 px-4 font-bold text-emerald-800">總計活動費用 (預估)</td>
+                                <td id="totalActivityCostValue" class="py-3 px-4 text-right font-bold text-emerald-800">約 $1482.00</td>
+                                <td id="totalActivityCostNote" class="py-3 px-4 text-emerald-800">(假設選擇最高價項目)</td>
                             </tr>
                         </tfoot>
                     </table>
                 </div>
                 <div class="mt-6 p-4 bg-stone-50 rounded-lg border border-stone-200">
-                    <h3 class="text-lg font-semibold text-stone-700 mb-2">重要小提醒：</h3>
+                    <h3 id="importantNotesTitle" class="text-lg font-semibold text-stone-700 mb-2">重要小提醒：</h3>
                     <ul class="list-disc list-inside text-stone-600 space-y-1">
-                        <li>上述價格僅為單人活動費用概估，實際價格可能因季節、預訂時間、供應商及個人選擇而異。</li>
-                        <li>此預算不包括國際機票、露營車租賃費用、燃料費、露營地住宿費、餐飲費、保險、簽證費用及其他個人購物等開銷。這些費用將是您旅程中的主要支出。</li>
-                        <li>露營車租賃費用會因車型、租賃天數、還有季節差很多，建議你提早訂，比較划算。</li>
-                        <li>露營地的費用也不同，一晚大概 USD $15 - $50。</li>
+                        <li id="note1">上述價格僅為單人活動費用概估，實際價格可能因季節、預訂時間、供應商及個人選擇而異。</li>
+                        <li id="note2">此預算不包括國際機票、露營車租賃費用、燃料費、露營地住宿費、餐飲費、保險、簽證費用及其他個人購物等開銷。這些費用將是您旅程中的主要支出。</li>
+                        <li id="note3">露營車租賃費用會因車型、租賃天數、還有季節差很多，建議你提早訂，比較划算。</li>
+                        <li id="note4">露營地的費用也不同，一晚大概 USD $15 - $50。</li>
                     </ul>
                 </div>
             </div>
@@ -236,263 +176,906 @@
 
         <section id="campervan-info" class="section">
             <div class="content-card">
-                <h2 class="text-2xl font-semibold text-teal-700 mb-4">露營車租借與自駕小撇步</h2>
-                <p class="mb-6">想要在紐西蘭租露營車趴趴走？這裡整理了一些主流的租車公司資訊，以及實用的自駕小撇步，助您旅程更順利！價格會因為季節、租借天數、車型新舊還有保險方案差很多，所以建議你直接去官網查最新報價，然後提早預訂，比較划算！</p>
+                <h2 id="campervanInfoTitle" class="text-2xl font-semibold text-emerald-700 mb-4">露營車租借與自駕小撇步</h2>
+                <p id="campervanInfoIntro" class="mb-6">想要在紐西蘭租露營車趴趴走？這裡整理了一些主流的租車公司資訊，以及實用的自駕小撇步，助您旅程更順利！價格會因為季節、租借天數、車型新舊還有保險方案差很多，所以建議你直接去官網查最新報價，然後提早預訂，比較划算！</p>
 
-                <h3 class="text-xl font-semibold text-teal-600 mt-6 mb-3">主流露營車租賃公司 (適合 2 人車型)：</h3>
-                <div class="grid md:grid-cols-2 gap-6 mb-8">
+                <h3 id="rentalCompaniesTitle" class="text-xl font-semibold text-emerald-600 mt-6 mb-3">主流露營車租賃公司 (適合 2 人車型)：</h3>
+                <div class="grid md:grid-cols-2 gap-6 mb-8" id="rentalCompaniesList">
                     <div class="p-4 bg-stone-50 rounded-lg border border-stone-200">
-                        <h4 class="font-bold text-stone-700">JUCY (JUCY Rentals)</h4>
-                        <p class="text-sm text-stone-600 mb-1">特色：經濟實惠，車型年輕活潑。推薦車型：JUCY Crib (2人座/2人睡)。</p>
-                        <p class="text-sm text-stone-600 mb-2">價格參考：淡季每日約 USD $60 - $100，旺季 USD $150 - $250+。</p>
-                        <a href="https://www.jucy.com/nz/en/campervans" target="_blank" class="booking-link text-sm">JUCY 官網</a>
+                        <h4 class="font-bold text-stone-700" id="jucyTitle">JUCY (JUCY Rentals)</h4>
+                        <p class="text-sm text-stone-600 mb-1" id="jucyFeature">特色：經濟實惠，車型年輕活潑。推薦車型：JUCY Crib (2人座/2人睡)。</p>
+                        <p class="text-sm text-stone-600 mb-2" id="jucyPrice">價格參考：淡季每日約 USD $60 - $100，旺季 USD $150 - $250+。</p>
+                        <a href="https://www.jucy.com/nz/en/campervans" target="_blank" class="booking-link text-sm" id="jucyLink">JUCY 官網</a>
                     </div>
                     <div class="p-4 bg-stone-50 rounded-lg border border-stone-200">
-                        <h4 class="font-bold text-stone-700">Britz (Britz Campervans)</h4>
-                        <p class="text-sm text-stone-600 mb-1">特色：多種車型，車輛較新配備齊全。推薦車型：Venturer (2人座/2人睡，帶衛浴)。</p>
-                        <p class="text-sm text-stone-600 mb-2">價格參考：淡季每日約 USD $80 - $150，旺季 USD $200 - $400+。</p>
-                        <a href="https://www.britz.com/nz/en" target="_blank" class="booking-link text-sm">Britz 官網</a>
+                        <h4 class="font-bold text-stone-700" id="britzTitle">Britz (Britz Campervans)</h4>
+                        <p class="text-sm text-stone-600 mb-1" id="britzFeature">特色：多種車型，車輛較新配備齊全。推薦車型：Venturer (2人座/2人睡，帶衛浴)。</p>
+                        <p class="text-sm text-stone-600 mb-2" id="britzPrice">價格參考：淡季每日約 USD $80 - $150，旺季 USD $200 - $400+。</p>
+                        <a href="https://www.britz.com/nz/en" target="_blank" class="booking-link text-sm" id="britzLink">Britz 官網</a>
                     </div>
                     <div class="p-4 bg-stone-50 rounded-lg border border-stone-200">
-                        <h4 class="font-bold text-stone-700">Maui (Maui Motorhomes)</h4>
-                        <p class="text-sm text-stone-600 mb-1">特色：高端品牌，車輛豪華設備齊全。推薦車型：Ultima (2人座/2人睡，帶衛浴)。</p>
-                        <p class="text-sm text-stone-600 mb-2">價格參考：淡季每日約 USD $100 - $200，旺季 USD $300 - $500+。</p>
-                        <a href="https://www.maui-rentals.com/nz/en" target="_blank" class="booking-link text-sm">Maui 官網</a>
+                        <h4 class="font-bold text-stone-700" id="mauiTitle">Maui (Maui Motorhomes)</h4>
+                        <p class="text-sm text-stone-600 mb-1" id="mauiFeature">特色：高端品牌，車輛豪華設備齊全。推薦車型：Ultima (2人座/2人睡，帶衛浴)。</p>
+                        <p class="text-sm text-stone-600 mb-2" id="mauiPrice">價格參考：淡季每日約 USD $100 - $200，旺季 USD $300 - $500+。</p>
+                        <a href="https://www.maui-rentals.com/nz/en" target="_blank" class="booking-link text-sm" id="mauiLink">Maui 官網</a>
                     </div>
                     <div class="p-4 bg-stone-50 rounded-lg border border-stone-200">
-                        <h4 class="font-bold text-stone-700">Apollo (Apollo Campers)</h4>
-                        <p class="text-sm text-stone-600 mb-1">特色：多種尺寸和價位選擇，彈性大。</p>
-                        <p class="text-sm text-stone-600 mb-2">價格參考：淡季每日約 USD $70 - $120，旺季 USD $180 - $300+。</p>
-                        <a href="https://www.apollocamper.com/nz/en" target="_blank" class="booking-link text-sm">Apollo 官網</a>
+                        <h4 class="font-bold text-stone-700" id="apolloTitle">Apollo (Apollo Campers)</h4>
+                        <p class="text-sm text-stone-600 mb-1" id="apolloFeature">特色：多種尺寸和價位選擇，彈性大。</p>
+                        <p class="text-sm text-stone-600 mb-2" id="apolloPrice">價格參考：淡季每日約 USD $70 - $120，旺季 USD $180 - $300+。</p>
+                        <a href="https://www.apollocamper.com/nz/en" target="_blank" class="booking-link text-sm" id="apolloLink">Apollo 官網</a>
                     </div>
                      <div class="p-4 bg-stone-50 rounded-lg border border-stone-200">
-                        <h4 class="font-bold text-stone-700">EPIC Campers</h4>
-                        <p class="text-sm text-stone-600 mb-1">特色：專注 2 人露營車，高品質且價格合理，適合自由露營。</p>
-                        <p class="text-sm text-stone-600 mb-2">價格參考：淡季每日約 USD $60 - $110，旺季 USD $150 - $250+。</p>
-                        <a href="https://www.epiccampers.co.nz/" target="_blank" class="booking-link text-sm">EPIC Campers 官網</a>
+                        <h4 class="font-bold text-stone-700" id="epicTitle">EPIC Campers</h4>
+                        <p class="text-sm text-stone-600 mb-1" id="epicFeature">特色：專注 2 人露營車，高品質且價格合理，適合自由露營。</p>
+                        <p class="text-sm text-stone-600 mb-2" id="epicPrice">價格參考：淡季每日約 USD $60 - $110，旺季 USD $150 - $250+。</p>
+                        <a href="https://www.epiccampers.co.nz/" target="_blank" class="booking-link text-sm" id="epicLink">EPIC Campers 官網</a>
                     </div>
                 </div>
 
-                <h3 class="text-xl font-semibold text-teal-600 mt-6 mb-3">露營車自駕小撇步：</h3>
+                <h3 id="drivingTipsTitle" class="text-xl font-semibold text-emerald-600 mt-6 mb-3">露營車自駕小撇步：</h3>
                 <ul class="list-disc list-inside space-y-2 text-stone-700">
-                    <li>**預訂**：露營車和熱門露營地（尤其是國家公園裡的）最好提早訂！</li>
-                    <li>**開車**：紐西蘭是右駕，要習慣一下喔！山路和彎道多，開慢點，注意限速！</li>
-                    <li>**露營地**：紐西蘭有很多設備齊全的假日公園 (Holiday Park) 和 DOC (Department of Conservation) 營地。假日公園通常有電、淋浴、廚房什麼的。</li>
-                    <li>**自由露營 (Freedom Camping)**：紐西蘭對自由露營規定很嚴格，不是每個地方都能隨便停。要遵守當地規定，而且露營車要有「自我認證 (Self-contained)」標誌才能自由露營喔。</li>
-                    <li>**補給**：小鎮的超市可能很早就關門了，最好在大城市多買點東西備著。</li>
-                    <li>**垃圾處理**：垃圾要自己帶走，保護紐西蘭的環境，愛護地球人人有責！</li>
-                    <li>**天氣**：紐西蘭天氣變化很快，即使是夏天也可能變冷或下雨，多帶幾件衣服準沒錯！</li>
-                    <li>**網路**：買張當地 SIM 卡，導航和聯絡都方便！</li>
-                    <li>**價格小撇步**：提早預訂、考慮淡季旅行、使用比較平台 (如 Camper Champ: <a href="https://camperchamp.com/new-zealand/" target="_blank" class="text-teal-600 hover:underline">https://camperchamp.com/new-zealand/</a>)、注意保險和額外費用。</li>
+                    <li id="tip1">**預訂**：露營車和熱門露營地（尤其是國家公園裡的）最好提早訂！</li>
+                    <li id="tip2">**開車**：紐西蘭是右駕，要習慣一下喔！山路和彎道多，開慢點，注意限速！</li>
+                    <li id="tip3">**露營地**：紐西蘭有很多設備齊全的假日公園 (Holiday Park) 和 DOC (Department of Conservation) 營地。假日公園通常有電、淋浴、廚房什麼的。</li>
+                    <li id="tip4">**自由露營 (Freedom Camping)**：紐西蘭對自由露營規定很嚴格，不是每個地方都能隨便停。要遵守當地規定，而且露營車要有「自我認證 (Self-contained)」標誌才能自由露營喔。</li>
+                    <li id="tip5">**補給**：小鎮的超市可能很早就關門了，最好在大城市多買點東西備著。</li>
+                    <li id="tip6">**垃圾處理**：垃圾要自己帶走，保護紐西蘭的環境，愛護地球人人有責！</li>
+                    <li id="tip7">**天氣**：紐西蘭天氣變化很快，即使是夏天也可能變冷或下雨，多帶幾件衣服準沒錯！</li>
+                    <li id="tip8">**網路**：買張當地 SIM 卡，導航和聯絡都方便！</li>
+                    <li id="tip9">**價格小撇步**：提早預訂、考慮淡季旅行、使用比較平台 (如 Camper Champ: <a href="https://camperchamp.com/new-zealand/" target="_blank" class="text-emerald-600 hover:underline" id="camperChampLink">https://camperchamp.com/new-zealand/</a>)、注意保險和額外費用。</li>
                 </ul>
             </div>
         </section>
     </main>
 
     <footer class="text-center p-4 text-stone-600 text-sm border-t border-stone-200 mt-8">
-        <p>© 紐西蘭露營車互動行程。祝您旅途愉快！</p>
+        <p id="footerText"></p>
     </footer>
 
     <script>
-        const itineraryData = [
-            {
-                day: 1,
-                title: "奧克蘭 (Auckland) 報到 - 領車準備囉！",
-                content: `
-                    <h4 class="text-lg font-semibold text-stone-700 mb-2">主要活動：</h4>
-                    <ul class="list-disc list-inside space-y-1 mb-3">
-                        <li>上午/下午：飛機降落 <a href="https://www.google.com/maps/search/Auckland+International+Airport" target="_blank" class="map-link">奧克蘭國際機場 (AKL)</a>。</li>
-                        <li>下午：去租車公司把你的露營車領出來！記得檢查清楚，然後熟悉一下怎麼開喔。</li>
-                        <li>傍晚：衝去超市補給一下，買點吃的喝的，接下來幾天就靠它了！</li>
-                    </ul>
-                    <h4 class="text-lg font-semibold text-stone-700 mb-2">住宿：</h4>
-                    <p class="mb-3">在 <a href="https://www.google.com/maps/search/Auckland" target="_blank" class="map-link">奧克蘭</a> 找個露營地或假日公園安頓下來，開始體驗露營車生活！</p>
-                    <h4 class="text-lg font-semibold text-stone-700 mb-2">露營車小撇步：</h4>
-                    <p>第一次開露營車可能會有點不習慣，最好白天多練習一下，安全第一！</p>
-                `,
-                routeMapLink: null
+        const translations = {
+            'zh-Hant': {
+                appTitle: '紐西蘭 12 天露營車趴趴走！SPA',
+                headerTitle: '紐西蘭 12 天露營車趴趴走！互動行程',
+                navOverview: '行程總覽',
+                navDailyPlan: '每日計劃',
+                navBudget: '預算與預訂',
+                navCampervanInfo: '露營車資訊',
+                overviewTitle: '歡迎來到您的紐西蘭冒險！',
+                overviewText1: '這是一個為期 12 天的紐西蘭露營車自駕行程，專為熱愛自由、探索魔戒奇幻場景、挑戰極限運動並沉醉於壯麗自然風光的您所設計。本互動行程將引導您輕鬆規劃這趟精彩旅程，從北島的地熱奇觀到南島的冰川峽灣，每一天都充滿驚喜！',
+                overviewText2: '您可以透過上方的導覽列切換不同主題，深入了解每日的詳細安排、預算規劃、重要景點的預訂方式，以及實用的露營車自駕小撇步。準備好，就讓我們一起開始探索這趟史詩級的紐西蘭之旅吧！',
+                highlightsTitle: '行程亮點：',
+                highlight1: '🚐 **露營車自駕**：想去哪就去哪，超彈性！',
+                highlight2: '🧙‍♂️ **魔戒迷必去**：哈比屯，根本走進電影裡！',
+                highlight3: '🤸 **高空彈跳**：心臟夠大顆就來跳！皇后鎮等你！',
+                highlight4: '🏞️ **美到爆的自然風光**：冰川、峽灣、火山，啥都有！',
+                highlight5: '🗿 **在地文化體驗**：感受毛利人的熱情！',
+                overviewCta: '點擊上方「每日計劃」開始查看詳細行程，或探索其他分頁獲取更多實用資訊。',
+                dailyPlanTitle: '每日行程細節',
+                dailyPlanIntro: '這裡是您 12 天紐西蘭冒險的每日行程規劃。點擊下方的日期按鈕，即可查看當天的詳細活動、住宿建議、注意事項以及相關的門票和地圖連結。讓您輕鬆掌握每一天的精彩！',
+                budgetTitle: '總結 & 大概花費',
+                budgetIntro1: '這份 12 天的紐西蘭露營車自駕行程，涵蓋了北島的魔戒奇幻與地熱景觀，以及南島的極限冒險與壯麗自然風光。行程緊湊但豐富，讓您在有限的時間內體驗紐西蘭的精華。',
+                budgetIntro2: '以下為行程中提及的主要門票和活動的預估費用（每人，單位：美元）。請注意，這些價格僅供參考，實際費用可能因季節、預訂時間及供應商而有所不同。',
+                tableHeaderActivity: '活動名稱',
+                tableHeaderPrice: '大概價格 (USD)',
+                tableHeaderBooking: '官方預訂網站',
+                totalActivityCostLabel: '總計活動費用 (預估)',
+                totalActivityCostValue: '約 $1482.00',
+                totalActivityCostNote: '(假設選擇最高價項目)',
+                importantNotesTitle: '重要小提醒：',
+                note1: '上述價格僅為單人活動費用概估，實際價格可能因季節、預訂時間、供應商及個人選擇而異。',
+                note2: '此預算不包括國際機票、露營車租賃費用、燃料費、露營地住宿費、餐飲費、保險、簽證費用及其他個人購物等開銷。這些費用將是您旅程中的主要支出。',
+                note3: '露營車租賃費用會因車型、租賃天數、還有季節差很多，建議你提早訂，比較划算。',
+                note4: '露營地的費用也不同，一晚大概 USD $15 - $50。',
+                campervanInfoTitle: '露營車租借與自駕小撇步',
+                campervanInfoIntro: '想要在紐西蘭租露營車趴趴走？這裡整理了一些主流的租車公司資訊，以及實用的自駕小撇步，助您旅程更順利！價格會因為季節、租借天數、車型新舊還有保險方案差很多，所以建議你直接去官網查最新報價，然後提早預訂，比較划算！',
+                rentalCompaniesTitle: '主流露營車租賃公司 (適合 2 人車型)：',
+                jucyTitle: 'JUCY (JUCY Rentals)',
+                jucyFeature: '特色：經濟實惠，車型年輕活潑。推薦車型：JUCY Crib (2人座/2人睡)。',
+                jucyPrice: '價格參考：淡季每日約 USD $60 - $100，旺季 USD $150 - $250+。',
+                jucyLink: 'JUCY 官網',
+                britzTitle: 'Britz (Britz Campervans)',
+                britzFeature: '特色：多種車型，車輛較新配備齊全。推薦車型：Venturer (2人座/2人睡，帶衛浴)。',
+                britzPrice: '價格參考：淡季每日約 USD $80 - $150，旺季 USD $200 - $400+。',
+                britzLink: 'Britz 官網',
+                mauiTitle: 'Maui (Maui Motorhomes)',
+                mauiFeature: '特色：高端品牌，車輛豪華設備齊全。推薦車型：Ultima (2人座/2人睡，帶衛浴)。',
+                mauiPrice: '價格參考：淡季每日約 USD $100 - $200，旺季 USD $300 - $500+。',
+                mauiLink: 'Maui 官網',
+                apolloTitle: 'Apollo (Apollo Campers)',
+                apolloFeature: '特色：多種尺寸和價位選擇，彈性大。',
+                apolloPrice: '價格參考：淡季每日約 USD $70 - $120，旺季 USD $180 - $300+。',
+                apolloLink: 'Apollo 官網',
+                epicTitle: 'EPIC Campers',
+                epicFeature: '特色：專注 2 人露營車，高品質且價格合理，適合自由露營。',
+                epicPrice: '價格參考：淡季每日約 USD $60 - $110，旺季 USD $150 - $250+。',
+                epicLink: 'EPIC Campers 官網',
+                drivingTipsTitle: '露營車自駕小撇步：',
+                tip1: '**預訂**：露營車和熱門露營地（尤其是國家公園裡的）最好提早訂！',
+                tip2: '**開車**：紐西蘭是右駕，要習慣一下喔！山路和彎道多，開慢點，注意限速！',
+                tip3: '**露營地**：紐西蘭有很多設備齊全的假日公園 (Holiday Park) 和 DOC (Department of Conservation) 營地。假日公園通常有電、淋浴、廚房什麼的。',
+                tip4: '**自由露營 (Freedom Camping)**：紐西蘭對自由露營規定很嚴格，不是每個地方都能隨便停。要遵守當地規定，而且露營車要有「自我認證 (Self-contained)」標誌才能自由露營喔。',
+                tip5: '**補給**：小鎮的超市可能很早就關門了，最好在大城市多買點東西備著。',
+                tip6: '**垃圾處理**：垃圾要自己帶走，保護紐西蘭的環境，愛護地球人人有責！',
+                tip7: '**天氣**：紐西蘭天氣變化很快，即使是夏天也可能變冷或下雨，多帶幾件衣服準沒錯！',
+                tip8: '**網路**：買張當地 SIM 卡，導航和聯絡都方便！',
+                tip9: '**價格小撇步**：提早預訂、考慮淡季旅行、使用比較平台 (如 Camper Champ: <a href="https://camperchamp.com/new-zealand/" target="_blank" class="text-emerald-600 hover:underline" id="camperChampLink">https://camperchamp.com/new-zealand/</a>)、注意保險和額外費用。',
+                footerText: '© 紐西蘭露營車互動行程。由 <a href="https://github.com/neobradley" target="_blank" class="text-emerald-600 hover:underline">neobradley</a> 製作。祝您旅途愉快！',
+                showRouteMap: '顯示當日地圖路線',
+                mainActivities: '主要活動：',
+                accommodation: '住宿：',
+                campervanTip: '露營車小撇步：',
+                ticketPrice: '門票：',
+                bookingLinkText: '前往預訂',
+                glacierBookingLinkFranzJosef: '預訂弗朗茲約瑟夫',
+                glacierBookingLinkFox: '預訂福克斯冰川',
+                tableCellVehiclePersonCount: '(依車輛/人數而異)',
+                tableCellHighestPriceNote: '(假設選擇最高價項目)',
+                tableCellLugePrice: '(纜車) + (滑板車)',
+                dayPrefix: '第',
+                daySuffix: '天',
+                dayTitles: [
+                    "奧克蘭 (Auckland) 報到 - 領車準備囉！",
+                    "奧克蘭 - 哈比屯 (Hobbiton) - 羅托魯瓦 (Rotorua)",
+                    "羅托魯瓦 - 陶波 (Taupō) - 威靈頓 (Wellington)",
+                    "威靈頓 - 皮克頓 (Picton) - 基督城 (Christchurch)",
+                    "基督城 - 蒂卡波湖 (Lake Tekapo) / 庫克山 (Mount Cook)",
+                    "蒂卡波湖 / 庫克山 - 皇后鎮 (Queenstown)",
+                    "皇后鎮 - 刺激日 (高空彈跳！)",
+                    "皇后鎮 - 蒂阿瑙 (Te Anau)",
+                    "蒂阿瑙 - 米爾福德峽灣 (Milford Sound) 遊船",
+                    "蒂阿瑙 - 瓦納卡 (Wanaka) - 冰川",
+                    "冰川 - 基督城 (Christchurch)",
+                    "基督城 - 回家囉！"
+                ],
+                dayContents: [
+                    `
+                        <h4 class="text-lg font-semibold text-stone-700 mb-2">主要活動：</h4>
+                        <ul class="list-disc list-inside space-y-1 mb-3">
+                            <li>上午/下午：飛機降落 <a href="https://www.google.com/maps/search/Auckland+International+Airport" target="_blank" class="map-link">奧克蘭國際機場 (AKL)</a>。</li>
+                            <li>下午：去租車公司把你的露營車領出來！記得檢查清楚，然後熟悉一下怎麼開喔。</li>
+                            <li>傍晚：衝去超市補給一下，買點吃的喝的，接下來幾天就靠它了！</li>
+                        </ul>
+                        <h4 class="text-lg font-semibold text-stone-700 mb-2">住宿：</h4>
+                        <p class="mb-3">在 <a href="https://www.google.com/maps/search/Auckland" target="_blank" class="map-link">奧克蘭</a> 找個露營地或假日公園安頓下來，開始體驗露營車生活！</p>
+                        <h4 class="text-lg font-semibold text-stone-700 mb-2">露營車小撇步：</h4>
+                        <p>第一次開露營車可能會有點不習慣，最好白天多練習一下，安全第一！</p>
+                    `,
+                    `
+                        <h4 class="text-lg font-semibold text-stone-700 mb-2">主要活動：</h4>
+                        <ul class="list-disc list-inside space-y-1 mb-3">
+                            <li>上午：從 <a href="https://www.google.com/maps/search/Auckland" target="_blank" class="map-link">奧克蘭</a> 出發，沿著懷卡托 (Waikato) 的美景，開到 <a href="https://www.google.com/maps/search/Matamata" target="_blank" class="map-link">馬塔馬塔 (Matamata)</a>。</li>
+                            <li>中午：到 <a href="https://www.google.com/maps/search/Hobbiton+Movie+Set" target="_blank" class="map-link">哈比屯電影場景 (Hobbiton Movie Set)</a> 啦！跟著導遊逛逛哈比人的小房子，再去綠龍酒館喝杯薑汁啤酒，感覺自己就是中土世界的一份子！<br>門票：大人大概 USD $72.00 (NZD $120.00) 起。 <a href="https://www.hobbitontours.com/" target="_blank" class="booking-link text-sm">前往預訂哈比屯</a></li>
+                            <li>下午：繼續開往 <a href="https://www.google.com/maps/search/Rotorua" target="_blank" class="map-link">羅托魯瓦 (Rotorua)</a>，這裡可是紐西蘭的地熱中心和毛利文化大本營！</li>
+                            <li>傍晚：到 <a href="https://www.google.com/maps/search/Rotorua" target="_blank" class="map-link">羅托魯瓦</a> 後，可以去 <a href="https://www.google.com/maps/search/Te+Puia" target="_blank" class="map-link">蒂普亞毛利文化村 (Te Puia)</a>，看看噴泉和泥漿池，超酷的！<br>門票：大人大概 USD $60.00 (NZD $100.00)。 <a href="http://www.tepuia.com/new-zealand/" target="_blank" class="booking-link text-sm">前往預訂蒂普亞</a></li>
+                        </ul>
+                        <h4 class="text-lg font-semibold text-stone-700 mb-2">住宿：</h4>
+                        <p class="mb-3"><a href="https://www.google.com/maps/search/Rotorua" target="_blank" class="map-link">羅托魯瓦</a> 的露營地或假日公園。</p>
+                    `,
+                    `
+                        <h4 class="text-lg font-semibold text-stone-700 mb-2">主要活動：</h4>
+                        <ul class="list-disc list-inside space-y-1 mb-3">
+                            <li>上午：繼續在 <a href="https://www.google.com/maps/search/Rotorua" target="_blank" class="map-link">羅托魯瓦</a> 玩，可以去 <a href="https://www.google.com/maps/search/Wai-O-Tapu+Thermal+Wonderland" target="_blank" class="map-link">懷奧塔普地熱世界 (Wai-O-Tapu Thermal Wonderland)</a> 看那些五顏六色的地熱池，或是到 <a href="https://www.google.com/maps/search/Redwood+Forest+Rotorua" target="_blank" class="map-link">紅木森林 (Redwood Forest)</a> 散散步。<br>門票：大人大概 USD $27.00 (NZD $45.00)。 <a href="https://www.waiotapu.co.nz/" target="_blank" class="booking-link text-sm">前往預訂懷奧塔普</a></li>
+                            <li>中午：開車去 <a href="https://www.google.com/maps/search/Taupo" target="_blank" class="map-link">陶波 (Taupō)</a>，紐西蘭最大的湖就在這！別忘了去 <a href="https://www.google.com/maps/search/Huka+Falls" target="_blank" class="map-link">胡卡瀑布 (Huka Falls)</a> 感受一下水流的氣勢！</li>
+                            <li>下午：一路向南，開到紐西蘭的首都 <a href="https://www.google.com/maps/search/Wellington" target="_blank" class="map-link">威靈頓 (Wellington)</a>。這段路會比較長，要有心理準備喔！</li>
+                        </ul>
+                        <h4 class="text-lg font-semibold text-stone-700 mb-2">住宿：</h4>
+                        <p class="mb-3"><a href="https://www.google.com/maps/search/Wellington" target="_blank" class="map-link">威靈頓</a> 附近的露營地或假日公園。</p>
+                        <h4 class="text-lg font-semibold text-stone-700 mb-2">露營車小撇步：</h4>
+                        <p>長途跋涉前，記得檢查油量和露營車的各種設備！</p>
+                    `,
+                    `
+                        <h4 class="text-lg font-semibold text-stone-700 mb-2">主要活動：</h4>
+                        <ul class="list-disc list-inside space-y-1 mb-3">
+                            <li>上午：搭乘跨島渡輪 (Interislander Ferry) 從 <a href="https://www.google.com/maps/search/Wellington" target="_blank" class="map-link">威靈頓</a> 到南島的 <a href="https://www.google.com/maps/search/Picton" target="_blank" class="map-link">皮克頓 (Picton)</a>。風景超美！<br>渡輪資訊：記得提早訂票！ <a href="https://www.interislander.co.nz/" target="_blank" class="booking-link text-sm">前往預訂渡輪</a></li>
+                            <li>中午/下午：到了 <a href="https://www.google.com/maps/search/Picton" target="_blank" class="map-link">皮克頓</a> 後，直接往南殺到 <a href="https://www.google.com/maps/search/Christchurch" target="_blank" class="map-link">基督城 (Christchurch)</a>。路上會經過 <a href="https://www.google.com/maps/search/Kaikoura" target="_blank" class="map-link">凱庫拉 (Kaikoura)</a>，可以稍微停一下。</li>
+                        </ul>
+                        <h4 class="text-lg font-semibold text-stone-700 mb-2">住宿：</h4>
+                        <p class="mb-3"><a href="https://www.google.com/maps/search/Christchurch" target="_blank" class="map-link">基督城</a> 的露營地或假日公園。</p>
+                        <h4 class="text-lg font-semibold text-stone-700 mb-2">行程提示：</h4>
+                        <p>這天開車時間會比較久，記得多休息！</p>
+                    `,
+                    `
+                        <h4 class="text-lg font-semibold text-stone-700 mb-2">主要活動：</h4>
+                        <ul class="list-disc list-inside space-y-1 mb-3">
+                            <li>上午：從 <a href="https://www.google.com/maps/search/Christchurch" target="_blank" class="map-link">基督城</a> 出發，前往南島的中心地帶。</li>
+                            <li>中午：抵達 <a href="https://www.google.com/maps/search/Lake+Tekapo" target="_blank" class="map-link">蒂卡波湖 (Lake Tekapo)</a>，那湖水藍得像牛奶一樣！別忘了去 <a href="https://www.google.com/maps/search/Church+of+the+Good+Shepherd" target="_blank" class="map-link">好牧羊人教堂</a> 拍張照。</li>
+                            <li>下午：可以在湖邊放鬆一下，或者繼續開到 <a href="https://www.google.com/maps/search/Mount+Cook+National+Park" target="_blank" class="map-link">庫克山國家公園 (Mount Cook National Park)</a>。</li>
+                            <li>傍晚：如果天氣好，<a href="https://www.google.com/maps/search/Lake+Tekapo" target="_blank" class="map-link">蒂卡波湖</a> 或 <a href="https://www.google.com/maps/search/Mount+Cook+National+Kaikoura" target="_blank" class="map-link">庫克山</a> 是看星星的絕佳地點！</li>
+                        </ul>
+                        <h4 class="text-lg font-semibold text-stone-700 mb-2">住宿：</h4>
+                        <p class="mb-3"><a href="https://www.google.com/maps/search/Lake+Tekapo" target="_blank" class="map-link">蒂卡波湖</a> 或 <a href="https://www.google.com/maps/search/Mount+Cook+National+Kaikoura" target="_blank" class="map-link">庫克山</a> 附近的露營地。</p>
+                    `,
+                    `
+                        <h4 class="text-lg font-semibold text-stone-700 mb-2">主要活動：</h4>
+                        <ul class="list-disc list-inside space-y-1 mb-3">
+                            <li>上午：在庫克山國家公園走走短途步道（像是胡克谷步道 Hooker Valley Track），欣賞冰川和高山美景。</li>
+                            <li>中午：從 <a href="https://www.google.com/maps/search/Mount+Cook+National+Park" target="_blank" class="map-link">庫克山</a> 地區出發，直奔紐西蘭的冒險之都 <a href="https://www.google.com/maps/search/Queenstown" target="_blank" class="map-link">皇后鎮 (Queenstown)</a>！</li>
+                            <li>下午：抵達 <a href="https://www.google.com/maps/search/Queenstown" target="_blank" class="map-link">皇后鎮</a>，找個露營地，感受一下這座城市的活力！</li>
+                        </ul>
+                        <h4 class="text-lg font-semibold text-stone-700 mb-2">住宿：</h4>
+                        <p class="mb-3"><a href="https://www.google.com/maps/search/Queenstown" target="_blank" class="map-link">皇后鎮</a> 露營地或假日公園。</p>
+                    `,
+                    `
+                        <h4 class="text-lg font-semibold text-stone-700 mb-2">主要活動：</h4>
+                        <p class="mb-3">今天就是挑戰極限的時候啦！來跳個高空彈跳 (Bungy Jumping)！</p>
+                        <ul class="list-disc list-inside space-y-1 mb-3">
+                            <li><a href="https://www.google.com/maps/search/Kawarau+Bridge+Bungy" target="_blank" class="map-link">卡瓦勞大橋 (Kawarau Bridge Bungy)</a>：世界第一個商業高空彈跳點。價格：大人大概 USD $192.00。</li>
+                            <li><a href="https://www.google.com/maps/search/Nevis+Bungy" target="_blank" class="map-link">尼維斯高空彈跳 (Nevis Bungy)</a>：紐西蘭最高的！價格：大人大概 USD $237.00。</li>
+                            <li><a href="https://www.bungy.co.nz/queenstown/" target="_blank" class="booking-link text-sm">前往預訂高空彈跳</a></li>
+                        </ul>
+                        <p class="mb-3">下午：除了高空彈跳，<a href="https://www.google.com/maps/search/Queenstown" target="_blank" class="map-link">皇后鎮</a> 還有超多刺激的活動：</p>
+                        <ul class="list-disc list-inside space-y-1 mb-3">
+                            <li>噴射快艇 (Shotover Jet)：價格：大人大概 USD $101.40。 <a href="https://www.shotoverjet.com/" target="_blank" class="booking-link text-sm">前往預訂噴射快艇</a></li>
+                            <li>滑翔傘 (Paragliding)：價格：大人大概 USD $179.40 - $221.40。 <a href="https://www.skytrek.co.nz/" target="_blank" class="booking-link text-sm">前往預訂滑翔傘</a></li>
+                            <li>天空纜車 & 滑板車 (Skyline Gondola & Luge)：價格：纜車大人大概 USD $31.20；滑板車大概 USD $51.60 - $69.00。 <a href="https://queenstown.skyline.co.nz/" target="_blank" class="booking-link text-sm">前往預訂天空纜車</a></li>
+                        </ul>
+                        <h4 class="text-lg font-semibold text-stone-700 mb-2">住宿：</h4>
+                        <p class="mb-3"><a href="https://www.google.com/maps/search/Queenstown" target="_blank" class="map-link">皇后鎮</a> 露營地或假日公園。</p>
+                    `,
+                    `
+                        <h4 class="text-lg font-semibold text-stone-700 mb-2">主要活動：</h4>
+                        <ul class="list-disc list-inside space-y-1 mb-3">
+                            <li>上午：在 <a href="https://www.google.com/maps/search/Queenstown" target="_blank" class="map-link">皇后鎮</a> 睡到自然醒，或者做點輕鬆的活動。</li>
+                            <li>中午：開車去 <a href="https://www.google.com/maps/search/Te+Anau" target="_blank" class="map-link">蒂阿瑙 (Te Anau)</a>，這裡是去米爾福德峽灣的必經小鎮。</li>
+                            <li>下午：到 <a href="https://www.google.com/maps/search/Te+Anau" target="_blank" class="map-link">蒂阿瑙</a> 後，可以去 <a href="https://www.google.com/maps/search/Te+Anau+Glowworm+Caves" target="_blank" class="map-link">蒂阿瑙螢火蟲洞 (Te Anau Glowworm Caves)</a> 看看那些亮晶晶的螢火蟲，或者在湖邊散散步。<br>門票：大人大概 USD $81.00。 <a href="https://www.realnz.com/en/experiences/glowworm-caves/te-anau-glowworm-caves/" target="_blank" class="booking-link text-sm">前往預訂螢火蟲洞</a></li>
+                        </ul>
+                        <h4 class="text-lg font-semibold text-stone-700 mb-2">住宿：</h4>
+                        <p class="mb-3"><a href="https://www.google.com/maps/search/Te+Anau" target="_blank" class="map-link">蒂阿瑙</a> 露營地或假日公園。</p>
+                    `,
+                    `
+                        <h4 class="text-lg font-semibold text-stone-700 mb-2">主要活動：</h4>
+                        <ul class="list-disc list-inside space-y-1 mb-3">
+                            <li>上午：一大早從 <a href="https://www.google.com/maps/search/Te+Anau" target="_blank" class="map-link">蒂阿瑙</a> 出發，沿著超有名的米爾福德公路 (Milford Road) 去 <a href="https://www.google.com/maps/search/Milford+Sound" target="_blank" class="map-link">米爾福德峽灣</a>。</li>
+                            <li>中午：到 <a href="https://www.google.com/maps/search/Milford+Sound" target="_blank" class="map-link">米爾福德峽灣</a> 後，參加峽灣遊船之旅。欣賞那些壯觀的懸崖、瀑布，還有機會看到海豹和企鵝喔！<br>遊船門票：大人大概 USD $85.80 - $105.00。 <a href="https://www.southerndiscoveries.co.nz/" target="_blank" class="booking-link text-sm">前往預訂峽灣遊船</a></li>
+                            <li>下午：遊船結束後，開車回 <a href="https://www.google.com/maps/search/Te+Anau" target="_blank" class="map-link">蒂阿瑙</a>。</li>
+                        </ul>
+                        <h4 class="text-lg font-semibold text-stone-700 mb-2">住宿：</h4>
+                        <p class="mb-3"><a href="https://www.google.com/maps/search/Te+Anau" target="_blank" class="map-link">蒂阿瑙</a> 露營地或假日公園。</p>
+                    `,
+                    `
+                        <h4 class="text-lg font-semibold text-stone-700 mb-2">主要活動：</h4>
+                        <ul class="list-disc list-inside space-y-1 mb-3">
+                            <li>上午：從 <a href="https://www.google.com/maps/search/Te+Anau" target="_blank" class="map-link">蒂阿瑙</a> 出發，開車去 <a href="https://www.google.com/maps/search/Wanaka" target="_blank" class="map-link">瓦納卡 (Wanaka)</a>。在瓦納卡可以短暫停一下，看看 <a href="https://www.google.com/maps/search/That+Wanaka+Tree" target="_blank" class="map-link">瓦納卡湖中的樹</a>。</li>
+                            <li>中午/下午：繼續開過哈斯特山口 (Haast Pass)，沿著西海岸去 <a href="https://www.google.com/maps/search/Franz+Josef+Glacier" target="_blank" class="map-link">弗朗茲約瑟夫冰川</a> 或 <a href="https://www.google.com/maps/search/Fox+Glacier" target="_blank" class="map-link">福克斯冰川</a>。</li>
+                            <li>傍晚：到冰川區後，可以選擇參加冰川健行或是直升機冰川降落 (Heli-Hike)。<br>直升機冰川降落價格：大概 USD $393.00 - $477.00。<br>
+                            <a href="https://www.franzjosefglacier.com/" target="_blank" class="booking-link text-sm mr-2">前往預訂弗朗茲約瑟夫</a>
+                            <a href="https://www.foxguides.co.nz/" target="_blank" class="booking-link text-sm">前往預訂福克斯冰川</a></li>
+                        </ul>
+                        <h4 class="text-lg font-semibold text-stone-700 mb-2">住宿：</h4>
+                        <p class="mb-3">冰川小鎮的露營地或假日公園。</p>
+                    `,
+                    `
+                        <h4 class="text-lg font-semibold text-stone-700 mb-2">主要活動：</h4>
+                        <ul class="list-disc list-inside space-y-1 mb-3">
+                            <li>上午：如果前一天沒玩夠冰川，今天可以補上！</li>
+                            <li>中午/下午：從冰川區出發，穿過亞瑟山口 (Arthur's Pass)，回到 <a href="https://www.google.com/maps/search/Christchurch" target="_blank" class="map-link">基督城 (Christchurch)</a>。這條路風景超美，但山路崎嶇，開車要小心！</li>
+                        </ul>
+                        <h4 class="text-lg font-semibold text-stone-700 mb-2">住宿：</h4>
+                        <p class="mb-3"><a href="https://www.google.com/maps/search/Christchurch" target="_blank" class="map-link">基督城</a> 露營地或假日公園。</p>
+                    `,
+                    `
+                        <h4 class="text-lg font-semibold text-stone-700 mb-2">主要活動：</h4>
+                        <ul class="list-disc list-inside space-y-1 mb-3">
+                            <li>上午：在 <a href="https://www.google.com/maps/search/Christchurch" target="_blank" class="map-link">基督城</a> 的還車點把露營車還了，記得加滿油，然後清理乾淨喔！</li>
+                            <li>中午/下午：去 <a href="https://www.google.com/maps/search/Christchurch+International+Airport" target="_blank" class="map-link">基督城國際機場 (CHC)</a>，搭飛機回家啦！紐西蘭掰掰！</li>
+                        </ul>
+                    `
+                ]
             },
-            {
-                day: 2,
-                title: "奧克蘭 - 哈比屯 (Hobbiton) - 羅托魯瓦 (Rotorua)",
-                content: `
-                    <h4 class="text-lg font-semibold text-stone-700 mb-2">主要活動：</h4>
-                    <ul class="list-disc list-inside space-y-1 mb-3">
-                        <li>上午：從 <a href="https://www.google.com/maps/search/Auckland" target="_blank" class="map-link">奧克蘭</a> 出發，沿著懷卡托 (Waikato) 的美景，開到 <a href="https://www.google.com/maps/search/Matamata" target="_blank" class="map-link">馬塔馬塔 (Matamata)</a>。</li>
-                        <li>中午：到 <a href="https://www.google.com/maps/search/Hobbiton+Movie+Set" target="_blank" class="map-link">哈比屯電影場景 (Hobbiton Movie Set)</a> 啦！跟著導遊逛逛哈比人的小房子，再去綠龍酒館喝杯薑汁啤酒，感覺自己就是中土世界的一份子！<br>門票：大人大概 USD $72.00 (NZD $120.00) 起。 <a href="https://www.hobbitontours.com/" target="_blank" class="booking-link text-sm">預訂哈比屯</a></li>
-                        <li>下午：繼續開往 <a href="https://www.google.com/maps/search/Rotorua" target="_blank" class="map-link">羅托魯瓦 (Rotorua)</a>，這裡可是紐西蘭的地熱中心和毛利文化大本營！</li>
-                        <li>傍晚：到 <a href="https://www.google.com/maps/search/Rotorua" target="_blank" class="map-link">羅托魯瓦</a> 後，可以去 <a href="https://www.google.com/maps/search/Te+Puia" target="_blank" class="map-link">蒂普亞毛利文化村 (Te Puia)</a>，看看噴泉和泥漿池，超酷的！<br>門票：大人大概 USD $60.00 (NZD $100.00)。 <a href="http://www.tepuia.com/new-zealand/" target="_blank" class="booking-link text-sm">預訂蒂普亞</a></li>
-                    </ul>
-                    <h4 class="text-lg font-semibold text-stone-700 mb-2">住宿：</h4>
-                    <p class="mb-3"><a href="https://www.google.com/maps/search/Rotorua" target="_blank" class="map-link">羅托魯瓦</a> 的露營地或假日公園。</p>
-                `,
-                routeMapLink: "https://www.google.com/maps/dir/?api=1&origin=Auckland&destination=Rotorua&waypoints=Matamata"
+            'en': {
+                appTitle: 'New Zealand 12-Day Campervan Adventure! SPA',
+                headerTitle: 'New Zealand 12-Day Campervan Adventure! Interactive Itinerary',
+                navOverview: 'Overview',
+                navDailyPlan: 'Daily Plan',
+                navBudget: 'Budget & Bookings',
+                navCampervanInfo: 'Campervan Info',
+                overviewTitle: 'Welcome to Your New Zealand Adventure!',
+                overviewText1: 'This is a 12-day New Zealand campervan self-drive itinerary, designed for those who love freedom, exploring the magical Lord of the Rings filming locations, challenging themselves with extreme sports, and immersing themselves in breathtaking natural landscapes. This interactive itinerary will guide you to easily plan this exciting journey, from the geothermal wonders of the North Island to the glaciers and fjords of the South Island, with every day full of surprises!',
+                overviewText2: 'You can switch between different themes using the navigation bar above to delve into daily arrangements, budget planning, booking information for key attractions, and practical campervan self-drive tips. Get ready, let\'s start exploring this epic New Zealand journey together!',
+                highlightsTitle: 'Itinerary Highlights:',
+                highlight1: '🚐 **Campervan Self-Drive** : Go wherever you want, super flexible!',
+                highlight2: '🧙‍♂️ **Must-Visit for LOTR Fans** : Hobbiton, literally stepping into the movie!',
+                highlight3: '🤸 **Bungy Jumping** : If you\'re brave enough, come jump! Queenstown awaits!',
+                highlight4: '🏞️ **Stunning Natural Scenery** : Glaciers, fjords, volcanoes, you name it!',
+                highlight5: '🗿 **Local Cultural Experience** : Feel the warmth of Maori culture!',
+                overviewCta: 'Click "Daily Plan" above to start viewing the detailed itinerary, or explore other tabs for more practical information.',
+                dailyPlanTitle: 'Daily Itinerary Details',
+                dailyPlanIntro: 'Here is your daily itinerary for the 12-day New Zealand adventure. Click on the date buttons below to view the detailed activities, accommodation suggestions, important notes, and relevant ticket and map links for that day. Easily keep track of each exciting day!',
+                budgetTitle: 'Summary & Estimated Costs',
+                budgetIntro1: 'This 12-day New Zealand campervan self-drive itinerary covers the magical and geothermal landscapes of the North Island, as well as the extreme adventures and magnificent natural beauty of the South Island. The itinerary is compact but rich, allowing you to experience the essence of New Zealand in a limited time.',
+                budgetIntro2: 'Below are the estimated costs for major tickets and activities mentioned in the itinerary (per person, in USD). Please note that these prices are for reference only, and actual costs may vary depending on the season, booking time, and provider.',
+                tableHeaderActivity: 'Activity Name',
+                tableHeaderPrice: 'Estimated Price (USD)',
+                tableHeaderBooking: 'Official Booking Website',
+                totalActivityCostLabel: 'Total Activity Cost (Estimated)',
+                totalActivityCostValue: 'Approx. $1482.00',
+                totalActivityCostNote: '(Assumes highest priced options selected)',
+                importantNotesTitle: 'Important Notes:',
+                note1: 'The above prices are estimated costs for single person activities only, and actual prices may vary depending on the season, booking time, supplier, and personal choices.',
+                note2: 'This budget does not include international airfare, campervan rental fees, fuel costs, campsite accommodation fees, food and beverage expenses, insurance, visa fees, and other personal shopping. These will be major expenses during your trip.',
+                note3: 'Campervan rental fees vary greatly depending on the vehicle type, rental duration, and season. It is recommended to book early for better prices.',
+                note4: 'Campsite fees vary by facilities and location, approximately USD $15 - $50 per night.',
+                campervanInfoTitle: 'Campervan Rental & Self-Drive Tips',
+                campervanInfoIntro: 'Looking to rent a campervan for your New Zealand adventure? Here\'s a summary of major rental companies and practical self-drive tips to make your trip smoother! Prices vary greatly depending on the season, rental duration, vehicle age, and insurance options, so it\'s recommended to check their official websites for the latest quotes and book early for better deals!',
+                rentalCompaniesTitle: 'Major Campervan Rental Companies (2-person models):',
+                jucyTitle: 'JUCY (JUCY Rentals)',
+                jucyFeature: 'Features: Economical and vibrant vehicles. Recommended model: JUCY Crib (2 seats/2 berths).',
+                jucyPrice: 'Price reference: Approx. USD $60 - $100 per day in low season, USD $150 - $250+ in peak season.',
+                jucyLink: 'JUCY Official Website',
+                britzTitle: 'Britz (Britz Campervans)',
+                britzFeature: 'Features: Various models, newer vehicles with complete amenities. Recommended model: Venturer (2 seats/2 berths, with bathroom).',
+                britzPrice: 'Price reference: Approx. USD $80 - $150 per day in low season, USD $200 - $400+ in peak season.',
+                britzLink: 'Britz Official Website',
+                mauiTitle: 'Maui (Maui Motorhomes)',
+                mauiFeature: 'Features: Premium brand, luxurious and well-equipped vehicles. Recommended model: Ultima (2 seats/2 berths, with bathroom).',
+                mauiPrice: 'Price reference: Approx. USD $100 - $200 per day in low season, USD $300 - $500+ in peak season.',
+                mauiLink: 'Maui Official Website',
+                apolloTitle: 'Apollo (Apollo Campers)',
+                apolloFeature: 'Features: Wide range of sizes and prices, flexible options.',
+                apolloPrice: 'Price reference: Approx. USD $70 - $120 per day in low season, USD $180 - $300+ in peak season.',
+                apolloLink: 'Apollo Official Website',
+                epicTitle: 'EPIC Campers',
+                epicFeature: 'Features: Specializes in 2-person campervans, high quality and reasonable prices, suitable for freedom camping.',
+                epicPrice: 'Price reference: Approx. USD $60 - $110 per day in low season, USD $150 - $250+ in peak season.',
+                epicLink: 'EPIC Campers Official Website',
+                drivingTipsTitle: 'Campervan Self-Drive Tips:',
+                tip1: '**Booking**: It\'s best to book campervans and popular campsites (especially in national parks) in advance!',
+                tip2: '**Driving**: New Zealand drives on the right, so get used to it! Many roads are mountainous and winding, drive slowly and observe speed limits!',
+                tip3: '**Campsites**: New Zealand has many well-equipped Holiday Parks and DOC (Department of Conservation) campsites. Holiday Parks usually offer power, showers, kitchen facilities, etc.',
+                tip4: '**Freedom Camping**: New Zealand has strict regulations for freedom camping, and it\'s not allowed everywhere. Be sure to follow local rules, and your campervan must have a "Self-contained" certificate for freedom camping.',
+                tip5: '**Supplies**: Supermarkets in small towns might close early, so it\'s best to stock up sufficiently in larger cities!',
+                tip6: '**Waste Disposal**: Always take all your rubbish with you to protect New Zealand\'s natural environment!',
+                tip7: '**Weather**: New Zealand weather can be unpredictable; even in summer, you might encounter low temperatures or rain, so pack layers of clothing!',
+                tip8: '**Internet**: Buy a local SIM card for navigation and communication!',
+                tip9: '**Price Tips**: Book early, consider traveling in the off-season, use comparison platforms (like Camper Champ: <a href="https://camperchamp.com/new-zealand/" target="_blank" class="text-emerald-600 hover:underline">https://camperchamp.com/new-zealand/</a>), and be aware of insurance and extra fees!',
+                footerText: '© New Zealand Campervan Interactive Itinerary. Made by <a href="https://github.com/neobradley" target="_blank" class="text-emerald-600 hover:underline">neobradley</a>. Wish you a pleasant journey!',
+                showRouteMap: 'Show Daily Route Map',
+                mainActivities: 'Main Activities:',
+                accommodation: 'Accommodation:',
+                campervanTip: 'Campervan Tip:',
+                ticketPrice: 'Ticket Price:',
+                bookingLinkText: 'Book Now',
+                glacierBookingLinkFranzJosef: 'Book Franz Josef',
+                glacierBookingLinkFox: 'Book Fox Glacier',
+                tableCellVehiclePersonCount: '(Varies by vehicle/persons)',
+                tableCellHighestPriceNote: '(Assumes highest priced options selected)',
+                tableCellLugePrice: '(Gondola) + (Luge)',
+                dayPrefix: 'Day',
+                daySuffix: '',
+                dayTitles: [
+                    "Arrival in Auckland - Campervan Pickup & Preparation!",
+                    "Auckland - Hobbiton - Rotorua",
+                    "Rotorua - Taupō - Wellington",
+                    "Wellington - Picton - Christchurch",
+                    "Christchurch - Lake Tekapo / Mount Cook",
+                    "Lake Tekapo / Mount Cook - Queenstown",
+                    "Queenstown - Adventure Day (Bungy Jumping!)",
+                    "Queenstown - Te Anau",
+                    "Te Anau - Milford Sound Cruise",
+                    "Te Anau - Wanaka - Glaciers (Franz Josef/Fox)",
+                    "Glaciers - Christchurch",
+                    "Christchurch - Time to Head Home!"
+                ],
+                dayContents: [
+                    `
+                        <h4 class="text-lg font-semibold text-stone-700 mb-2">Main Activities:</h4>
+                        <ul class="list-disc list-inside space-y-1 mb-3">
+                            <li>Morning/Afternoon: Arrive at <a href="https://www.google.com/maps/search/Auckland+International+Airport" target="_blank" class="map-link">Auckland International Airport (AKL)</a>.</li>
+                            <li>Afternoon: Pick up your pre-booked campervan near the airport. Make sure to check its condition and get familiar with its operation.</li>
+                            <li>Evening: Head to a supermarket to stock up on groceries and essentials for the coming days!</li>
+                        </ul>
+                        <h4 class="text-lg font-semibold text-stone-700 mb-2">Accommodation:</h4>
+                        <p class="mb-3">Settle into a campsite or holiday park near <a href="https://www.google.com/maps/search/Auckland" target="_blank" class="map-link">Auckland</a> and get accustomed to campervan life!</p>
+                        <h4 class="text-lg font-semibold text-stone-700 mb-2">Campervan Tip:</h4>
+                        <p>It might take some getting used to driving a campervan for the first time. It's best to practice during daylight hours for safety!</p>
+                    `,
+                    `
+                        <h4 class="text-lg font-semibold text-stone-700 mb-2">Main Activities:</h4>
+                        <ul class="list-disc list-inside space-y-1 mb-3">
+                            <li>Morning: Depart from <a href="https://www.google.com/maps/search/Auckland" target="_blank" class="map-link">Auckland</a>, drive through the scenic Waikato region to <a href="https://www.google.com/maps/search/Matamata" target="_blank" class="map-link">Matamata</a>.</li>
+                            <li>Noon: Arrive at <a href="https://www.google.com/maps/search/Hobbiton+Movie+Set" target="_blank" class="map-link">Hobbiton Movie Set</a>! Take a guided tour, stroll among the hobbit holes, and enjoy a ginger beer at the Green Dragon Inn. <br>Ticket Price: Adults approx. USD $72.00 (NZD $120.00) onwards. <a href="https://www.hobbitontours.com/" target="_blank" class="booking-link text-sm">Book Hobbiton</a></li>
+                            <li>Afternoon: Continue driving to <a href="https://www.google.com/maps/search/Rotorua" target="_blank" class="map-link">Rotorua</a>, New Zealand's geothermal capital and Maori cultural center!</li>
+                            <li>Evening: Upon arrival in <a href="https://www.google.com/maps/search/Rotorua" target="_blank" class="map-link">Rotorua</a>, consider visiting <a href="https://www.google.com/maps/search/Te+Puia" target="_blank" class="map-link">Te Puia Maori Cultural Village</a> to see geysers and mud pools! <br>Ticket Price: Adults approx. USD $60.00 (NZD $100.00). <a href="http://www.tepuia.com/new-zealand/" target="_blank" class="booking-link text-sm">Book Te Puia</a></li>
+                        </ul>
+                        <h4 class="text-lg font-semibold text-stone-700 mb-2">Accommodation:</h4>
+                        <p class="mb-3">Campsite or holiday park in <a href="https://www.google.com/maps/search/Rotorua" target="_blank" class="map-link">Rotorua</a>.</p>
+                    `,
+                    `
+                        <h4 class="text-lg font-semibold text-stone-700 mb-2">Main Activities:</h4>
+                        <ul class="list-disc list-inside space-y-1 mb-3">
+                            <li>Morning: Continue exploring <a href="https://www.google.com/maps/search/Rotorua" target="_blank" class="map-link">Rotorua</a>, you can visit <a href="https://www.google.com/maps/search/Wai-O-Tapu+Thermal+Wonderland" target="_blank" class="map-link">Wai-O-Tapu Thermal Wonderland</a> to see the colorful geothermal pools, or take a walk in <a href="https://www.google.com/maps/search/Redwood+Forest+Rotorua" target="_blank" class="map-link">Redwood Forest</a>. <br>Ticket Price: Adults approx. USD $27.00 (NZD $45.00). <a href="https://www.waiotapu.co.nz/" target="_blank" class="booking-link text-sm">Book Wai-O-Tapu</a></li>
+                            <li>Noon: Drive to <a href="https://www.google.com/maps/search/Taupo" target="_blank" class="map-link">Taupō</a>, home to New Zealand's largest lake! Don't forget to visit <a href="https://www.google.com/maps/search/Huka+Falls" target="_blank" class="map-link">Huka Falls</a> to feel its majestic power!</li>
+                            <li>Afternoon: Continue south to New Zealand's capital, <a href="https://www.google.com/maps/search/Wellington" target="_blank" class="map-link">Wellington</a>. This will be a longer drive, so be prepared!</li>
+                        </ul>
+                        <h4 class="text-lg font-semibold text-stone-700 mb-2">Accommodation:</h4>
+                        <p class="mb-3">Campsite or holiday park near <a href="https://www.google.com/maps/search/Wellington" target="_blank" class="map-link">Wellington</a>.</p>
+                        <h4 class="text-lg font-semibold text-stone-700 mb-2">Campervan Tip:</h4>
+                        <p>Before long drives, remember to check fuel levels and campervan facilities!</p>
+                    `,
+                    `
+                        <h4 class="text-lg font-semibold text-stone-700 mb-2">Main Activities:</h4>
+                        <ul class="list-disc list-inside space-y-1 mb-3">
+                            <li>Morning: Take the Interislander Ferry from <a href="https://www.google.com/maps/search/Wellington" target="_blank" class="map-link">Wellington</a> to <a href="https://www.google.com/maps/search/Picton" target="_blank" class="map-link">Picton</a> on the South Island. The scenery is stunning! <br>Ferry Info: Remember to book tickets in advance! <a href="https://www.interislander.co.nz/" target="_blank" class="booking-link text-sm">Book Ferry</a></li>
+                            <li>Noon/Afternoon: After arriving in <a href="https://www.google.com/maps/search/Picton" target="_blank" class="map-link">Picton</a>, drive south directly to <a href="https://www.google.com/maps/search/Christchurch" target="_blank" class="map-link">Christchurch</a>. You can pass through <a href="https://www.google.com/maps/search/Kaikoura" target="_blank" class="map-link">Kaikoura</a> and make a brief stop.</li>
+                        </ul>
+                        <h4 class="text-lg font-semibold text-stone-700 mb-2">Accommodation:</h4>
+                        <p class="mb-3">Campsite or holiday park in <a href="https://www.google.com/maps/search/Christchurch" target="_blank" class="map-link">Christchurch</a>.</p>
+                        <h4 class="text-lg font-semibold text-stone-700 mb-2">Itinerary Tip:</h4>
+                        <p>This will be a longer driving day, so make sure to get enough rest!</p>
+                    `,
+                    `
+                        <h4 class="text-lg font-semibold text-stone-700 mb-2">Main Activities:</h4>
+                        <ul class="list-disc list-inside space-y-1 mb-3">
+                            <li>Morning: Depart from <a href="https://www.google.com/maps/search/Christchurch" target="_blank" class="map-link">Christchurch</a>, heading towards the heart of the South Island.</li>
+                            <li>Noon: Arrive at <a href="https://www.google.com/maps/search/Lake+Tekapo" target="_blank" class="map-link">Lake Tekapo</a>, admire its unique turquoise blue waters! Don't forget to visit the <a href="https://www.google.com/maps/search/Church+of+the+Good+Shepherd" target="_blank" class="map-link">Church of the Good Shepherd</a>.</li>
+                            <li>Afternoon: You can relax by the lake, or continue driving to <a href="https://www.google.com/maps/search/Mount+Cook+National+Park" target="_blank" class="map-link">Mount Cook National Park</a>.</li>
+                            <li>Evening: If the weather is clear, <a href="https://www.google.com/maps/search/Lake+Tekapo" target="_blank" class="map-link">Lake Tekapo</a> or <a href="https://www.google.com/maps/search/Mount+Cook+National+Kaikoura" target="_blank" class="map-link">Mount Cook</a> area are excellent spots for stargazing!</li>
+                        </ul>
+                        <h4 class="text-lg font-semibold text-stone-700 mb-2">Accommodation:</h4>
+                        <p class="mb-3">Campsite near <a href="https://www.google.com/maps/search/Lake+Tekapo" target="_blank" class="map-link">Lake Tekapo</a> or <a href="https://www.google.com/maps/search/Mount+Cook+National+Kaikoura" target="_blank" class="map-link">Mount Cook</a>.</p>
+                    `,
+                    `
+                        <h4 class="text-lg font-semibold text-stone-700 mb-2">Main Activities:</h4>
+                        <ul class="list-disc list-inside space-y-1 mb-3">
+                            <li>Morning: Take a short hike in <a href="https://www.google.com/maps/search/Mount+Cook+National+Park" target="_blank" class="map-link">Mount Cook National Park</a> (e.g., Hooker Valley Track) to admire the glaciers and mountain scenery.</li>
+                            <li>Noon: Depart from <a href="https://www.google.com/maps/search/Mount+Cook+National+Park" target="_blank" class="map-link">Mount Cook</a> area, heading directly to <a href="https://www.google.com/maps/search/Queenstown" target="_blank" class="map-link">Queenstown</a>, New Zealand's adventure capital!</li>
+                            <li>Afternoon: Arrive in <a href="https://www.google.com/maps/search/Queenstown" target="_blank" class="map-link">Queenstown</a>, check into a campsite, and soak in the vibrant atmosphere of the city!</li>
+                        </ul>
+                        <h4 class="text-lg font-semibold text-stone-700 mb-2">Accommodation:</h4>
+                        <p class="mb-3">Campsite or holiday park in <a href="https://www.google.com/maps/search/Queenstown" target="_blank" class="map-link">Queenstown</a>.</p>
+                    `,
+                    `
+                        <h4 class="text-lg font-semibold text-stone-700 mb-2">Main Activities:</h4>
+                        <p class="mb-3">Today is the day to challenge your limits! Go bungy jumping!</p>
+                        <ul class="list-disc list-inside space-y-1 mb-3">
+                            <li><a href="https://www.google.com/maps/search/Kawarau+Bridge+Bungy" target="_blank" class="map-link">Kawarau Bridge Bungy</a>: The world's first commercial bungy jumping site. Price: Approx. USD $192.00 for adults.</li>
+                            <li><a href="https://www.google.com/maps/search/Nevis+Bungy" target="_blank" class="map-link">Nevis Bungy</a>: New Zealand's highest! Price: Approx. USD $237.00 for adults.</li>
+                            <li><a href="https://www.bungy.co.nz/queenstown/" target="_blank" class="booking-link text-sm">前往預訂高空彈跳</a></li>
+                        </ul>
+                        <p class="mb-3">下午：除了高空彈跳，<a href="https://www.google.com/maps/search/Queenstown" target="_blank" class="map-link">皇后鎮</a> 還有超多刺激的活動：</p>
+                        <ul class="list-disc list-inside space-y-1 mb-3">
+                            <li>噴射快艇 (Shotover Jet)：價格：大人大概 USD $101.40。 <a href="https://www.shotoverjet.com/" target="_blank" class="booking-link text-sm">前往預訂噴射快艇</a></li>
+                            <li>滑翔傘 (Paragliding)：價格：大人大概 USD $179.40 - $221.40。 <a href="https://www.skytrek.co.nz/" target="_blank" class="booking-link text-sm">前往預訂滑翔傘</a></li>
+                            <li>天空纜車 & 滑板車 (Skyline Gondola & Luge)：價格：纜車大人大概 USD $31.20；滑板車大概 USD $51.60 - $69.00。 <a href="https://queenstown.skyline.co.nz/" target="_blank" class="booking-link text-sm">前往預訂天空纜車</a></li>
+                        </ul>
+                        <h4 class="text-lg font-semibold text-stone-700 mb-2">住宿：</h4>
+                        <p class="mb-3"><a href="https://www.google.com/maps/search/Queenstown" target="_blank" class="map-link">皇后鎮</a> 露營地或假日公園。</p>
+                    `,
+                    `
+                        <h4 class="text-lg font-semibold text-stone-700 mb-2">主要活動：</h4>
+                        <ul class="list-disc list-inside space-y-1 mb-3">
+                            <li>上午：在 <a href="https://www.google.com/maps/search/Queenstown" target="_blank" class="map-link">皇后鎮</a> 睡到自然醒，或者做點輕鬆的活動。</li>
+                            <li>中午：開車去 <a href="https://www.google.com/maps/search/Te+Anau" target="_blank" class="map-link">蒂阿瑙 (Te Anau)</a>，這裡是去米爾福德峽灣的必經小鎮。</li>
+                            <li>下午：到 <a href="https://www.google.com/maps/search/Te+Anau" target="_blank" class="map-link">蒂阿瑙</a> 後，可以去 <a href="https://www.google.com/maps/search/Te+Anau+Glowworm+Caves" target="_blank" class="map-link">蒂阿瑙螢火蟲洞 (Te Anau Glowworm Caves)</a> 看看那些亮晶晶的螢火蟲，或者在湖邊散散步。<br>門票：大人大概 USD $81.00。 <a href="https://www.realnz.com/en/experiences/glowworm-caves/te-anau-glowworm-caves/" target="_blank" class="booking-link text-sm">前往預訂螢火蟲洞</a></li>
+                        </ul>
+                        <h4 class="text-lg font-semibold text-stone-700 mb-2">住宿：</h4>
+                        <p class="mb-3"><a href="https://www.google.com/maps/search/Te+Anau" target="_blank" class="map-link">蒂阿瑙</a> 露營地或假日公園。</p>
+                    `,
+                    `
+                        <h4 class="text-lg font-semibold text-stone-700 mb-2">主要活動：</h4>
+                        <ul class="list-disc list-inside space-y-1 mb-3">
+                            <li>上午：一大早從 <a href="https://www.google.com/maps/search/Te+Anau" target="_blank" class="map-link">蒂阿瑙</a> 出發，沿著超有名的米爾福德公路 (Milford Road) 去 <a href="https://www.google.com/maps/search/Milford+Sound" target="_blank" class="map-link">米爾福德峽灣</a>。</li>
+                            <li>中午：到 <a href="https://www.google.com/maps/search/Milford+Sound" target="_blank" class="map-link">米爾福德峽灣</a> 後，參加峽灣遊船之旅。欣賞那些壯觀的懸崖、瀑布，還有機會看到海豹和企鵝喔！<br>遊船門票：大人大概 USD $85.80 - $105.00。 <a href="https://www.southerndiscoveries.co.nz/" target="_blank" class="booking-link text-sm">前往預訂峽灣遊船</a></li>
+                            <li>下午：遊船結束後，開車回 <a href="https://www.google.com/maps/search/Te+Anau" target="_blank" class="map-link">蒂阿瑙</a>。</li>
+                        </ul>
+                        <h4 class="text-lg font-semibold text-stone-700 mb-2">住宿：</h4>
+                        <p class="mb-3"><a href="https://www.google.com/maps/search/Te+Anau" target="_blank" class="map-link">蒂阿瑙</a> 露營地或假日公園。</p>
+                    `,
+                    `
+                        <h4 class="text-lg font-semibold text-stone-700 mb-2">主要活動：</h4>
+                        <ul class="list-disc list-inside space-y-1 mb-3">
+                            <li>上午：從 <a href="https://www.google.com/maps/search/Te+Anau" target="_blank" class="map-link">蒂阿瑙</a> 出發，開車去 <a href="https://www.google.com/maps/search/Wanaka" target="_blank" class="map-link">瓦納卡 (Wanaka)</a>。在瓦納卡可以短暫停一下，看看 <a href="https://www.google.com/maps/search/That+Wanaka+Tree" target="_blank" class="map-link">瓦納卡湖中的樹</a>。</li>
+                            <li>中午/下午：繼續開過哈斯特山口 (Haast Pass)，沿著西海岸去 <a href="https://www.google.com/maps/search/Franz+Josef+Glacier" target="_blank" class="map-link">弗朗茲約瑟夫冰川</a> 或 <a href="https://www.google.com/maps/search/Fox+Glacier" target="_blank" class="map-link">福克斯冰川</a>。</li>
+                            <li>傍晚：到冰川區後，可以選擇參加冰川健行或是直升機冰川降落 (Heli-Hike)。<br>直升機冰川降落價格：大概 USD $393.00 - $477.00。<br>
+                            <a href="https://www.franzjosefglacier.com/" target="_blank" class="booking-link text-sm mr-2">前往預訂弗朗茲約瑟夫</a>
+                            <a href="https://www.foxguides.co.nz/" target="_blank" class="booking-link text-sm">前往預訂福克斯冰川</a></li>
+                        </ul>
+                        <h4 class="text-lg font-semibold text-stone-700 mb-2">住宿：</h4>
+                        <p class="mb-3">冰川小鎮的露營地或假日公園。</p>
+                    `,
+                    `
+                        <h4 class="text-lg font-semibold text-stone-700 mb-2">主要活動：</h4>
+                        <ul class="list-disc list-inside space-y-1 mb-3">
+                            <li>上午：如果前一天沒玩夠冰川，今天可以補上！</li>
+                            <li>中午/下午：從冰川區出發，穿過亞瑟山口 (Arthur's Pass)，回到 <a href="https://www.google.com/maps/search/Christchurch" target="_blank" class="map-link">基督城 (Christchurch)</a>。這條路風景超美，但山路崎嶇，開車要小心！</li>
+                        </ul>
+                        <h4 class="text-lg font-semibold text-stone-700 mb-2">住宿：</h4>
+                        <p class="mb-3"><a href="https://www.google.com/maps/search/Christchurch" target="_blank" class="map-link">基督城</a> 露營地或假日公園。</p>
+                    `,
+                    `
+                        <h4 class="text-lg font-semibold text-stone-700 mb-2">主要活動：</h4>
+                        <ul class="list-disc list-inside space-y-1 mb-3">
+                            <li>上午：在 <a href="https://www.google.com/maps/search/Christchurch" target="_blank" class="map-link">基督城</a> 的還車點把露營車還了，記得加滿油，然後清理乾淨喔！</li>
+                            <li>中午/下午：去 <a href="https://www.google.com/maps/search/Christchurch+International+Airport" target="_blank" class="map-link">基督城國際機場 (CHC)</a>，搭飛機回家啦！紐西蘭掰掰！</li>
+                        </ul>
+                    `
+                ]
             },
-            {
-                day: 3,
-                title: "羅托魯瓦 - 陶波 (Taupō) - 威靈頓 (Wellington)",
-                content: `
-                    <h4 class="text-lg font-semibold text-stone-700 mb-2">主要活動：</h4>
-                    <ul class="list-disc list-inside space-y-1 mb-3">
-                        <li>上午：繼續在 <a href="https://www.google.com/maps/search/Rotorua" target="_blank" class="map-link">羅托魯瓦</a> 玩，可以去 <a href="https://www.google.com/maps/search/Wai-O-Tapu+Thermal+Wonderland" target="_blank" class="map-link">懷奧塔普地熱世界 (Wai-O-Tapu Thermal Wonderland)</a> 看那些五顏六色的地熱池，或是到 <a href="https://www.google.com/maps/search/Redwood+Forest+Rotorua" target="_blank" class="map-link">紅木森林 (Redwood Forest)</a> 散散步。<br>門票：大人大概 USD $27.00 (NZD $45.00)。 <a href="https://www.waiotapu.co.nz/" target="_blank" class="booking-link text-sm">預訂懷奧塔普</a></li>
-                        <li>中午：開車去 <a href="https://www.google.com/maps/search/Taupo" target="_blank" class="map-link">陶波 (Taupō)</a>，紐西蘭最大的湖就在這！別忘了去 <a href="https://www.google.com/maps/search/Huka+Falls" target="_blank" class="map-link">胡卡瀑布 (Huka Falls)</a> 感受一下水流的氣勢！</li>
-                        <li>下午：一路向南，開到紐西蘭的首都 <a href="https://www.google.com/maps/search/Wellington" target="_blank" class="map-link">威靈頓 (Wellington)</a>。這段路會比較長，要有心理準備喔！</li>
-                    </ul>
-                    <h4 class="text-lg font-semibold text-stone-700 mb-2">住宿：</h4>
-                    <p class="mb-3"><a href="https://www.google.com/maps/search/Wellington" target="_blank" class="map-link">威靈頓</a> 附近的露營地或假日公園。</p>
-                    <h4 class="text-lg font-semibold text-stone-700 mb-2">露營車小撇步：</h4>
-                    <p>長途跋涉前，記得檢查油量和露營車的各種設備！</p>
-                `,
-                routeMapLink: "https://www.google.com/maps/dir/?api=1&origin=Rotorua&destination=Wellington&waypoints=Taupo"
-            },
-            {
-                day: 4,
-                title: "威靈頓 - 皮克頓 (Picton) - 基督城 (Christchurch)",
-                content: `
-                    <h4 class="text-lg font-semibold text-stone-700 mb-2">主要活動：</h4>
-                    <ul class="list-disc list-inside space-y-1 mb-3">
-                        <li>上午：搭乘跨島渡輪 (Interislander Ferry) 從 <a href="https://www.google.com/maps/search/Wellington" target="_blank" class="map-link">威靈頓</a> 到南島的 <a href="https://www.google.com/maps/search/Picton" target="_blank" class="map-link">皮克頓 (Picton)</a>。風景超美！<br>渡輪資訊：記得提早訂票！ <a href="https://www.interislander.co.nz/" target="_blank" class="booking-link text-sm">預訂渡輪</a></li>
-                        <li>中午/下午：到了 <a href="https://www.google.com/maps/search/Picton" target="_blank" class="map-link">皮克頓</a> 後，直接往南殺到 <a href="https://www.google.com/maps/search/Christchurch" target="_blank" class="map-link">基督城 (Christchurch)</a>。路上會經過 <a href="https://www.google.com/maps/search/Kaikoura" target="_blank" class="map-link">凱庫拉 (Kaikoura)</a>，可以稍微停一下。</li>
-                    </ul>
-                    <h4 class="text-lg font-semibold text-stone-700 mb-2">住宿：</h4>
-                    <p class="mb-3"><a href="https://www.google.com/maps/search/Christchurch" target="_blank" class="map-link">基督城</a> 的露營地或假日公園。</p>
-                    <h4 class="text-lg font-semibold text-stone-700 mb-2">行程提示：</h4>
-                    <p>這天開車時間會比較久，記得多休息！</p>
-                `,
-                routeMapLink: "https://www.google.com/maps/dir/?api=1&origin=Wellington+Ferry+Terminal&destination=Christchurch&waypoints=Picton+Ferry+Terminal|Kaikoura"
-            },
-            {
-                day: 5,
-                title: "基督城 - 蒂卡波湖 (Lake Tekapo) / 庫克山 (Mount Cook)",
-                content: `
-                    <h4 class="text-lg font-semibold text-stone-700 mb-2">主要活動：</h4>
-                    <ul class="list-disc list-inside space-y-1 mb-3">
-                        <li>上午：從 <a href="https://www.google.com/maps/search/Christchurch" target="_blank" class="map-link">基督城</a> 出發，前往南島的中心地帶。</li>
-                        <li>中午：抵達 <a href="https://www.google.com/maps/search/Lake+Tekapo" target="_blank" class="map-link">蒂卡波湖 (Lake Tekapo)</a>，那湖水藍得像牛奶一樣！別忘了去 <a href="https://www.google.com/maps/search/Church+of+the+Good+Shepherd" target="_blank" class="map-link">好牧羊人教堂</a> 拍張照。</li>
-                        <li>下午：可以在湖邊放鬆一下，或者繼續開到 <a href="https://www.google.com/maps/search/Mount+Cook+National+Park" target="_blank" class="map-link">庫克山國家公園 (Mount Cook National Park)</a>。</li>
-                        <li>傍晚：如果天氣好，<a href="https://www.google.com/maps/search/Lake+Tekapo" target="_blank" class="map-link">蒂卡波湖</a> 或 <a href="https://www.google.com/maps/search/Mount+Cook+National+Kaikoura" target="_blank" class="map-link">庫克山</a> 是看星星的絕佳地點！</li>
-                    </ul>
-                    <h4 class="text-lg font-semibold text-stone-700 mb-2">住宿：</h4>
-                    <p class="mb-3"><a href="https://www.google.com/maps/search/Lake+Tekapo" target="_blank" class="map-link">蒂卡波湖</a> 或 <a href="https://www.google.com/maps/search/Mount+Cook+National+Kaikoura" target="_blank" class="map-link">庫克山</a> 附近的露營地。</p>
-                `,
-                routeMapLink: "https://www.google.com/maps/dir/?api=1&origin=Christchurch&destination=Mount+Cook+National+Park&waypoints=Lake+Tekapo"
-            },
-            {
-                day: 6,
-                title: "蒂卡波湖 / 庫克山 - 皇后鎮 (Queenstown)",
-                content: `
-                    <h4 class="text-lg font-semibold text-stone-700 mb-2">主要活動：</h4>
-                    <ul class="list-disc list-inside space-y-1 mb-3">
-                        <li>上午：在庫克山国家公园走走短途步道（像是胡克谷步道 Hooker Valley Track），欣赏冰川和高山美景。</li>
-                        <li>中午：從 <a href="https://www.google.com/maps/search/Mount+Cook+National+Park" target="_blank" class="map-link">庫克山</a> 地區出發，直奔紐西蘭的冒險之都 <a href="https://www.google.com/maps/search/Queenstown" target="_blank" class="map-link">皇后鎮 (Queenstown)</a>！</li>
-                        <li>下午：抵達 <a href="https://www.google.com/maps/search/Queenstown" target="_blank" class="map-link">皇后鎮</a>，找個露營地，感受一下這座城市的活力！</li>
-                    </ul>
-                    <h4 class="text-lg font-semibold text-stone-700 mb-2">住宿：</h4>
-                    <p class="mb-3"><a href="https://www.google.com/maps/search/Queenstown" target="_blank" class="map-link">皇后鎮</a> 露營地或假日公園。</p>
-                `,
-                routeMapLink: "https://www.google.com/maps/dir/?api=1&origin=Mount+Cook+National+Park&destination=Queenstown&waypoints=Wanaka"
-            },
-            {
-                day: 7,
-                title: "皇后鎮 - 刺激日 (高空彈跳！)",
-                content: `
-                    <h4 class="text-lg font-semibold text-stone-700 mb-2">主要活動：</h4>
-                    <p class="mb-3">今天就是挑戰極限的時候啦！來跳個高空彈跳 (Bungy Jumping)！</p>
-                    <ul class="list-disc list-inside space-y-1 mb-3">
-                        <li><a href="https://www.google.com/maps/search/Kawarau+Bridge+Bungy" target="_blank" class="map-link">卡瓦勞大橋 (Kawarau Bridge Bungy)</a>：世界第一個商業高空彈跳點。價格：大人大概 USD $192.00。</li>
-                        <li><a href="https://www.google.com/maps/search/Nevis+Bungy" target="_blank" class="map-link">尼維斯高空彈跳 (Nevis Bungy)</a>：紐西蘭最高的！價格：大人大概 USD $237.00。</li>
-                        <li><a href="https://www.bungy.co.nz/queenstown/" target="_blank" class="booking-link text-sm">預訂高空彈跳</a></li>
-                    </ul>
-                    <p class="mb-3">下午：除了高空彈跳，<a href="https://www.google.com/maps/search/Queenstown" target="_blank" class="map-link">皇后鎮</a> 還有超多刺激的活動：</p>
-                    <ul class="list-disc list-inside space-y-1 mb-3">
-                        <li>噴射快艇 (Shotover Jet)：價格：大人大概 USD $101.40。 <a href="https://www.shotoverjet.com/" target="_blank" class="booking-link text-sm">預訂噴射快艇</a></li>
-                        <li>滑翔傘 (Paragliding)：價格：大人大概 USD $179.40 - $221.40。 <a href="https://www.skytrek.co.nz/" target="_blank" class="booking-link text-sm">預訂滑翔傘</a></li>
-                        <li>天空纜車 & 滑板車 (Skyline Gondola & Luge)：價格：纜車大人大概 USD $31.20；滑板車大概 USD $51.60 - $69.00。 <a href="https://queenstown.skyline.co.nz/" target="_blank" class="booking-link text-sm">預訂天空纜車</a></li>
-                    </ul>
-                    <h4 class="text-lg font-semibold text-stone-700 mb-2">住宿：</h4>
-                    <p class="mb-3"><a href="https://www.google.com/maps/search/Queenstown" target="_blank" class="map-link">皇后鎮</a> 露營地或假日公園。</p>
-                `,
-                routeMapLink: null
-            },
-            {
-                day: 8,
-                title: "皇后鎮 - 蒂阿瑙 (Te Anau)",
-                content: `
-                    <h4 class="text-lg font-semibold text-stone-700 mb-2">主要活動：</h4>
-                    <ul class="list-disc list-inside space-y-1 mb-3">
-                        <li>上午：在 <a href="https://www.google.com/maps/search/Queenstown" target="_blank" class="map-link">皇后鎮</a> 睡到自然醒，或者做點輕鬆的活動。</li>
-                        <li>中午：開車去 <a href="https://www.google.com/maps/search/Te+Anau" target="_blank" class="map-link">蒂阿瑙 (Te Anau)</a>，這裡是去米爾福德峽灣的必經小鎮。</li>
-                        <li>下午：到 <a href="https://www.google.com/maps/search/Te+Anau" target="_blank" class="map-link">蒂阿瑙</a> 後，可以去 <a href="https://www.google.com/maps/search/Te+Anau+Glowworm+Caves" target="_blank" class="map-link">蒂阿瑙螢火蟲洞 (Te Anau Glowworm Caves)</a> 看看那些亮晶晶的螢火蟲，或者在湖邊散散步。<br>門票：大人大概 USD $81.00。 <a href="https://www.realnz.com/en/experiences/glowworm-caves/te-anau-glowworm-caves/" target="_blank" class="booking-link text-sm">預訂螢火蟲洞</a></li>
-                    </ul>
-                    <h4 class="text-lg font-semibold text-stone-700 mb-2">住宿：</h4>
-                    <p class="mb-3"><a href="https://www.google.com/maps/search/Te+Anau" target="_blank" class="map-link">蒂阿瑙</a> 露營地或假日公園。</p>
-                `,
-                routeMapLink: "https://www.google.com/maps/dir/?api=1&origin=Queenstown&destination=Te+Anau"
-            },
-            {
-                day: 9,
-                title: "蒂阿瑙 - 米爾福德峽灣 (Milford Sound) 遊船",
-                content: `
-                    <h4 class="text-lg font-semibold text-stone-700 mb-2">主要活動：</h4>
-                    <ul class="list-disc list-inside space-y-1 mb-3">
-                        <li>上午：一大早從 <a href="https://www.google.com/maps/search/Te+Anau" target="_blank" class="map-link">蒂阿瑙</a> 出發，沿著超有名的米爾福德公路 (Milford Road) 去 <a href="https://www.google.com/maps/search/Milford+Sound" target="_blank" class="map-link">米爾福德峽灣</a>。</li>
-                        <li>中午：到 <a href="https://www.google.com/maps/search/Milford+Sound" target="_blank" class="map-link">米爾福德峽灣</a> 後，參加峽灣遊船之旅。欣賞那些壯觀的懸崖、瀑布，還有機會看到海豹和企鵝喔！<br>遊船門票：大人大概 USD $85.80 - $105.00。 <a href="https://www.southerndiscoveries.co.nz/" target="_blank" class="booking-link text-sm">預訂峽灣遊船</a></li>
-                        <li>下午：遊船結束後，開車回 <a href="https://www.google.com/maps/search/Te+Anau" target="_blank" class="map-link">蒂阿瑙</a>。</li>
-                    </ul>
-                    <h4 class="text-lg font-semibold text-stone-700 mb-2">住宿：</h4>
-                    <p class="mb-3"><a href="https://www.google.com/maps/search/Te+Anau" target="_blank" class="map-link">蒂阿瑙</a> 露營地或假日公園。</p>
-                `,
-                routeMapLink: "https://www.google.com/maps/dir/?api=1&origin=Te+Anau&destination=Te+Anau&waypoints=Milford+Sound"
-            },
-            {
-                day: 10,
-                title: "蒂阿瑙 - 瓦納卡 (Wanaka) - 冰川",
-                content: `
-                    <h4 class="text-lg font-semibold text-stone-700 mb-2">主要活動：</h4>
-                    <ul class="list-disc list-inside space-y-1 mb-3">
-                        <li>上午：從 <a href="https://www.google.com/maps/search/Te+Anau" target="_blank" class="map-link">蒂阿瑙</a> 出發，開車去 <a href="https://www.google.com/maps/search/Wanaka" target="_blank" class="map-link">瓦納卡 (Wanaka)</a>。在瓦納卡可以短暫停一下，看看 <a href="https://www.google.com/maps/search/That+Wanaka+Tree" target="_blank" class="map-link">瓦納卡湖中的樹</a>。</li>
-                        <li>中午/下午：繼續開過哈斯特山口 (Haast Pass)，沿著西海岸去 <a href="https://www.google.com/maps/search/Franz+Josef+Glacier" target="_blank" class="map-link">弗朗茲約瑟夫冰川</a> 或 <a href="https://www.google.com/maps/search/Fox+Glacier" target="_blank" class="map-link">福克斯冰川</a>。</li>
-                        <li>傍晚：到冰川區後，可以選擇參加冰川健行或是直升機冰川降落 (Heli-Hike)。<br>直升機冰川降落價格：大概 USD $393.00 - $477.00。<br>
-                        <a href="https://www.franzjosefglacier.com/" target="_blank" class="booking-link text-sm mr-2">預訂弗朗茲約瑟夫</a>
-                        <a href="https://www.foxguides.co.nz/" target="_blank" class="booking-link text-sm">預訂福克斯冰川</a></li>
-                    </ul>
-                    <h4 class="text-lg font-semibold text-stone-700 mb-2">住宿：</h4>
-                    <p class="mb-3">冰川小鎮的露營地或假日公園。</p>
-                `,
-                routeMapLink: "https://www.google.com/maps/dir/?api=1&origin=Te+Anau&destination=Franz+Josef+Glacier&waypoints=Wanaka|Fox+Glacier"
-            },
-            {
-                day: 11,
-                title: "冰川 - 基督城 (Christchurch)",
-                content: `
-                    <h4 class="text-lg font-semibold text-stone-700 mb-2">主要活動：</h4>
-                    <ul class="list-disc list-inside space-y-1 mb-3">
-                        <li>上午：如果前一天沒玩夠冰川，今天可以補上！</li>
-                        <li>中午/下午：從冰川區出發，穿過亞瑟山口 (Arthur's Pass)，回到 <a href="https://www.google.com/maps/search/Christchurch" target="_blank" class="map-link">基督城 (Christchurch)</a>。這條路風景超美，但山路崎嶇，開車要小心！</li>
-                    </ul>
-                    <h4 class="text-lg font-semibold text-stone-700 mb-2">住宿：</h4>
-                    <p class="mb-3"><a href="https://www.google.com/maps/search/Christchurch" target="_blank" class="map-link">基督城</a> 露營地或假日公園。</p>
-                `,
-                routeMapLink: "https://www.google.com/maps/dir/?api=1&origin=Franz+Josef+Glacier&destination=Christchurch&waypoints=Arthur's+Pass"
-            },
-            {
-                day: 12,
-                title: "基督城 - 回家囉！",
-                content: `
-                    <h4 class="text-lg font-semibold text-stone-700 mb-2">主要活動：</h4>
-                    <ul class="list-disc list-inside space-y-1 mb-3">
-                        <li>上午：在 <a href="https://www.google.com/maps/search/Christchurch" target="_blank" class="map-link">基督城</a> 的還車點把露營車還了，記得加滿油，然後清理乾淨喔！</li>
-                        <li>中午/下午：去 <a href="https://www.google.com/maps/search/Christchurch+International+Airport" target="_blank" class="map-link">基督城國際機場 (CHC)</a>，搭飛機回家啦！紐西蘭掰掰！</li>
-                    </ul>
-                `,
-                routeMapLink: null
+            'en': {
+                appTitle: 'New Zealand 12-Day Campervan Adventure! SPA',
+                headerTitle: 'New Zealand 12-Day Campervan Adventure! Interactive Itinerary',
+                navOverview: 'Overview',
+                navDailyPlan: 'Daily Plan',
+                navBudget: 'Budget & Bookings',
+                navCampervanInfo: 'Campervan Info',
+                overviewTitle: 'Welcome to Your New Zealand Adventure!',
+                overviewText1: 'This is a 12-day New Zealand campervan self-drive itinerary, designed for those who love freedom, exploring the magical Lord of the Rings filming locations, challenging themselves with extreme sports, and immersing themselves in breathtaking natural landscapes. This interactive itinerary will guide you to easily plan this exciting journey, from the geothermal wonders of the North Island to the glaciers and fjords of the South Island, with every day full of surprises!',
+                overviewText2: 'You can switch between different themes using the navigation bar above to delve into daily arrangements, budget planning, booking information for key attractions, and practical campervan self-drive tips. Get ready, let\'s start exploring this epic New Zealand journey together!',
+                highlightsTitle: 'Itinerary Highlights:',
+                highlight1: '🚐 **Campervan Self-Drive** : Go wherever you want, super flexible!',
+                highlight2: '🧙‍♂️ **Must-Visit for LOTR Fans** : Hobbiton, literally stepping into the movie!',
+                highlight3: '🤸 **Bungy Jumping** : If you\'re brave enough, come jump! Queenstown awaits!',
+                highlight4: '🏞️ **Stunning Natural Scenery** : Glaciers, fjords, volcanoes, you name it!',
+                highlight5: '🗿 **Local Cultural Experience** : Feel the warmth of Maori culture!',
+                overviewCta: 'Click "Daily Plan" above to start viewing the detailed itinerary, or explore other tabs for more practical information.',
+                dailyPlanTitle: 'Daily Itinerary Details',
+                dailyPlanIntro: 'Here is your daily itinerary for the 12-day New Zealand adventure. Click on the date buttons below to view the detailed activities, accommodation suggestions, important notes, and relevant ticket and map links for that day. Easily keep track of each exciting day!',
+                budgetTitle: 'Summary & Estimated Costs',
+                budgetIntro1: 'This 12-day New Zealand campervan self-drive itinerary covers the magical and geothermal landscapes of the North Island, as well as the extreme adventures and magnificent natural beauty of the South Island. The itinerary is compact but rich, allowing you to experience the essence of New Zealand in a limited time.',
+                budgetIntro2: 'Below are the estimated costs for major tickets and activities mentioned in the itinerary (per person, in USD). Please note that these prices are for reference only, and actual costs may vary depending on the season, booking time, and provider.',
+                tableHeaderActivity: 'Activity Name',
+                tableHeaderPrice: 'Estimated Price (USD)',
+                tableHeaderBooking: 'Official Booking Website',
+                totalActivityCostLabel: 'Total Activity Cost (Estimated)',
+                totalActivityCostValue: 'Approx. $1482.00',
+                totalActivityCostNote: '(Assumes highest priced options selected)',
+                importantNotesTitle: 'Important Notes:',
+                note1: 'The above prices are estimated costs for single person activities only, and actual prices may vary depending on the season, booking time, supplier, and personal choices.',
+                note2: 'This budget does not include international airfare, campervan rental fees, fuel costs, campsite accommodation fees, food and beverage expenses, insurance, visa fees, and other personal shopping. These will be major expenses during your trip.',
+                note3: 'Campervan rental fees vary greatly depending on the vehicle type, rental duration, and season. It is recommended to book early for better prices.',
+                note4: 'Campsite fees vary by facilities and location, approximately USD $15 - $50 per night.',
+                campervanInfoTitle: 'Campervan Rental & Self-Drive Tips',
+                campervanInfoIntro: 'Looking to rent a campervan for your New Zealand adventure? Here\'s a summary of major rental companies and practical self-drive tips to make your trip smoother! Prices vary greatly depending on the season, rental duration, vehicle age, and insurance options, so it\'s recommended to check their official websites for the latest quotes and book early for better deals!',
+                rentalCompaniesTitle: 'Major Campervan Rental Companies (2-person models):',
+                jucyTitle: 'JUCY (JUCY Rentals)',
+                jucyFeature: 'Features: Economical and vibrant vehicles. Recommended model: JUCY Crib (2 seats/2 berths).',
+                jucyPrice: 'Price reference: Approx. USD $60 - $100 per day in low season, USD $150 - $250+ in peak season.',
+                jucyLink: 'JUCY Official Website',
+                britzTitle: 'Britz (Britz Campervans)',
+                britzFeature: 'Features: Various models, newer vehicles with complete amenities. Recommended model: Venturer (2 seats/2 berths, with bathroom).',
+                britzPrice: 'Price reference: Approx. USD $80 - $150 per day in low season, USD $200 - $400+ in peak season.',
+                britzLink: 'Britz Official Website',
+                mauiTitle: 'Maui (Maui Motorhomes)',
+                mauiFeature: 'Features: Premium brand, luxurious and well-equipped vehicles. Recommended model: Ultima (2 seats/2 berths, with bathroom).',
+                mauiPrice: 'Price reference: Approx. USD $100 - $200 per day in low season, USD $300 - $500+ in peak season.',
+                mauiLink: 'Maui Official Website',
+                apolloTitle: 'Apollo (Apollo Campers)',
+                apolloFeature: 'Features: Wide range of sizes and prices, flexible options.',
+                apolloPrice: 'Price reference: Approx. USD $70 - $120 per day in low season, USD $180 - $300+ in peak season.',
+                apolloLink: 'Apollo Official Website',
+                epicTitle: 'EPIC Campers',
+                epicFeature: 'Features: Specializes in 2-person campervans, high quality and reasonable prices, suitable for freedom camping.',
+                epicPrice: 'Price reference: Approx. USD $60 - $110 per day in low season, USD $150 - $250+ in peak season.',
+                epicLink: 'EPIC Campers Official Website',
+                drivingTipsTitle: 'Campervan Self-Drive Tips:',
+                tip1: '**Booking**: It\'s best to book campervans and popular campsites (especially in national parks) in advance!',
+                tip2: '**Driving**: New Zealand drives on the right, so get used to it! Many roads are mountainous and winding, drive slowly and observe speed limits!',
+                tip3: '**Campsites**: New Zealand has many well-equipped Holiday Parks and DOC (Department of Conservation) campsites. Holiday Parks usually offer power, showers, kitchen facilities, etc.',
+                tip4: '**Freedom Camping**: New Zealand has strict regulations for freedom camping, and it\'s not allowed everywhere. Be sure to follow local rules, and your campervan must have a "Self-contained" certificate for freedom camping.',
+                tip5: '**Supplies**: Supermarkets in small towns might close early, so it\'s best to stock up sufficiently in larger cities!',
+                tip6: '**Waste Disposal**: Always take all your rubbish with you to protect New Zealand\'s natural environment!',
+                tip7: '**Weather**: New Zealand weather can be unpredictable; even in summer, you might encounter low temperatures or rain, so pack layers of clothing!',
+                tip8: '**Internet**: Buy a local SIM card for navigation and communication!',
+                tip9: '**Price Tips**: Book early, consider traveling in the off-season, use comparison platforms (like Camper Champ: <a href="https://camperchamp.com/new-zealand/" target="_blank" class="text-emerald-600 hover:underline">https://camperchamp.com/new-zealand/</a>), and be aware of insurance and extra fees!',
+                footerText: '© New Zealand Campervan Interactive Itinerary. Made by <a href="https://github.com/neobradley" target="_blank" class="text-emerald-600 hover:underline">neobradley</a>. Wish you a pleasant journey!',
+                showRouteMap: 'Show Daily Route Map',
+                mainActivities: 'Main Activities:',
+                accommodation: 'Accommodation:',
+                campervanTip: 'Campervan Tip:',
+                ticketPrice: 'Ticket Price:',
+                bookingLinkText: 'Book Now',
+                glacierBookingLinkFranzJosef: 'Book Franz Josef',
+                glacierBookingLinkFox: 'Book Fox Glacier',
+                tableCellVehiclePersonCount: '(Varies by vehicle/persons)',
+                tableCellHighestPriceNote: '(Assumes highest priced options selected)',
+                tableCellLugePrice: '(Gondola) + (Luge)',
+                dayPrefix: 'Day',
+                daySuffix: '',
+                dayTitles: [
+                    "Arrival in Auckland - Campervan Pickup & Preparation!",
+                    "Auckland - Hobbiton - Rotorua",
+                    "Rotorua - Taupō - Wellington",
+                    "Wellington - Picton - Christchurch",
+                    "Christchurch - Lake Tekapo / Mount Cook",
+                    "Lake Tekapo / Mount Cook - Queenstown",
+                    "Queenstown - Adventure Day (Bungy Jumping!)",
+                    "Queenstown - Te Anau",
+                    "Te Anau - Milford Sound Cruise",
+                    "Te Anau - Wanaka - Glaciers (Franz Josef/Fox)",
+                    "Glaciers - Christchurch",
+                    "Christchurch - Time to Head Home!"
+                ],
+                dayContents: [
+                    `
+                        <h4 class="text-lg font-semibold text-stone-700 mb-2">Main Activities:</h4>
+                        <ul class="list-disc list-inside space-y-1 mb-3">
+                            <li>Morning/Afternoon: Arrive at <a href="https://www.google.com/maps/search/Auckland+International+Airport" target="_blank" class="map-link">Auckland International Airport (AKL)</a>.</li>
+                            <li>Afternoon: Pick up your pre-booked campervan near the airport. Make sure to check its condition and get familiar with its operation.</li>
+                            <li>Evening: Head to a supermarket to stock up on groceries and essentials for the coming days!</li>
+                        </ul>
+                        <h4 class="text-lg font-semibold text-stone-700 mb-2">Accommodation:</h4>
+                        <p class="mb-3">Settle into a campsite or holiday park near <a href="https://www.google.com/maps/search/Auckland" target="_blank" class="map-link">Auckland</a> and get accustomed to campervan life!</p>
+                        <h4 class="text-lg font-semibold text-stone-700 mb-2">Campervan Tip:</h4>
+                        <p>It might take some getting used to driving a campervan for the first time. It's best to practice during daylight hours for safety!</p>
+                    `,
+                    `
+                        <h4 class="text-lg font-semibold text-stone-700 mb-2">Main Activities:</h4>
+                        <ul class="list-disc list-inside space-y-1 mb-3">
+                            <li>Morning: Depart from <a href="https://www.google.com/maps/search/Auckland" target="_blank" class="map-link">Auckland</a>, drive through the scenic Waikato region to <a href="https://www.google.com/maps/search/Matamata" target="_blank" class="map-link">Matamata</a>.</li>
+                            <li>Noon: Arrive at <a href="https://www.google.com/maps/search/Hobbiton+Movie+Set" target="_blank" class="map-link">Hobbiton Movie Set</a>! Take a guided tour, stroll among the hobbit holes, and enjoy a ginger beer at the Green Dragon Inn. <br>Ticket Price: Adults approx. USD $72.00 (NZD $120.00) onwards. <a href="https://www.hobbitontours.com/" target="_blank" class="booking-link text-sm">Book Hobbiton</a></li>
+                            <li>Afternoon: Continue driving to <a href="https://www.google.com/maps/search/Rotorua" target="_blank" class="map-link">Rotorua</a>, New Zealand's geothermal capital and Maori cultural center!</li>
+                            <li>Evening: Upon arrival in <a href="https://www.google.com/maps/search/Rotorua" target="_blank" class="map-link">Rotorua</a>, consider visiting <a href="https://www.google.com/maps/search/Te+Puia" target="_blank" class="map-link">Te Puia Maori Cultural Village</a> to see geysers and mud pools! <br>Ticket Price: Adults approx. USD $60.00 (NZD $100.00). <a href="http://www.tepuia.com/new-zealand/" target="_blank" class="booking-link text-sm">Book Te Puia</a></li>
+                        </ul>
+                        <h4 class="text-lg font-semibold text-stone-700 mb-2">Accommodation:</h4>
+                        <p class="mb-3">Campsite or holiday park in <a href="https://www.google.com/maps/search/Rotorua" target="_blank" class="map-link">Rotorua</a>.</p>
+                    `,
+                    `
+                        <h4 class="text-lg font-semibold text-stone-700 mb-2">Main Activities:</h4>
+                        <ul class="list-disc list-inside space-y-1 mb-3">
+                            <li>Morning: Continue exploring <a href="https://www.google.com/maps/search/Rotorua" target="_blank" class="map-link">Rotorua</a>, you can visit <a href="https://www.google.com/maps/search/Wai-O-Tapu+Thermal+Wonderland" target="_blank" class="map-link">Wai-O-Tapu Thermal Wonderland</a> to see the colorful geothermal pools, or take a walk in <a href="https://www.google.com/maps/search/Redwood+Forest+Rotorua" target="_blank" class="map-link">Redwood Forest</a>. <br>Ticket Price: Adults approx. USD $27.00 (NZD $45.00). <a href="https://www.waiotapu.co.nz/" target="_blank" class="booking-link text-sm">Book Wai-O-Tapu</a></li>
+                            <li>Noon: Drive to <a href="https://www.google.com/maps/search/Taupo" target="_blank" class="map-link">Taupō</a>, home to New Zealand's largest lake! Don't forget to visit <a href="https://www.google.com/maps/search/Huka+Falls" target="_blank" class="map-link">Huka Falls</a> to feel its majestic power!</li>
+                            <li>Afternoon: Continue south to New Zealand's capital, <a href="https://www.google.com/maps/search/Wellington" target="_blank" class="map-link">Wellington</a>. This will be a longer drive, so be prepared!</li>
+                        </ul>
+                        <h4 class="text-lg font-semibold text-stone-700 mb-2">Accommodation:</h4>
+                        <p class="mb-3">Campsite or holiday park near <a href="https://www.google.com/maps/search/Wellington" target="_blank" class="map-link">Wellington</a>.</p>
+                        <h4 class="text-lg font-semibold text-stone-700 mb-2">Campervan Tip:</h4>
+                        <p>Before long drives, remember to check fuel levels and campervan facilities!</p>
+                    `,
+                    `
+                        <h4 class="text-lg font-semibold text-stone-700 mb-2">Main Activities:</h4>
+                        <ul class="list-disc list-inside space-y-1 mb-3">
+                            <li>Morning: Take the Interislander Ferry from <a href="https://www.google.com/maps/search/Wellington" target="_blank" class="map-link">Wellington</a> to <a href="https://www.google.com/maps/search/Picton" target="_blank" class="map-link">Picton</a> on the South Island. The scenery is stunning! <br>Ferry Info: Remember to book tickets in advance! <a href="https://www.interislander.co.nz/" target="_blank" class="booking-link text-sm">Book Ferry</a></li>
+                            <li>Noon/Afternoon: After arriving in <a href="https://www.google.com/maps/search/Picton" target="_blank" class="map-link">Picton</a>, drive south directly to <a href="https://www.google.com/maps/search/Christchurch" target="_blank" class="map-link">Christchurch</a>. You can pass through <a href="https://www.google.com/maps/search/Kaikoura" target="_blank" class="map-link">Kaikoura</a> and make a brief stop.</li>
+                        </ul>
+                        <h4 class="text-lg font-semibold text-stone-700 mb-2">Accommodation:</h4>
+                        <p class="mb-3">Campsite or holiday park in <a href="https://www.google.com/maps/search/Christchurch" target="_blank" class="map-link">Christchurch</a>.</p>
+                        <h4 class="text-lg font-semibold text-stone-700 mb-2">Itinerary Tip:</h4>
+                        <p>This will be a longer driving day, so make sure to get enough rest!</p>
+                    `,
+                    `
+                        <h4 class="text-lg font-semibold text-stone-700 mb-2">Main Activities:</h4>
+                        <ul class="list-disc list-inside space-y-1 mb-3">
+                            <li>Morning: Depart from <a href="https://www.google.com/maps/search/Christchurch" target="_blank" class="map-link">Christchurch</a>, heading towards the heart of the South Island.</li>
+                            <li>Noon: Arrive at <a href="https://www.google.com/maps/search/Lake+Tekapo" target="_blank" class="map-link">Lake Tekapo</a>, admire its unique turquoise blue waters! Don't forget to visit the <a href="https://www.google.com/maps/search/Church+of+the+Good+Shepherd" target="_blank" class="map-link">Church of the Good Shepherd</a>.</li>
+                            <li>Afternoon: You can relax by the lake, or continue driving to <a href="https://www.google.com/maps/search/Mount+Cook+National+Park" target="_blank" class="map-link">Mount Cook National Park</a>.</li>
+                            <li>Evening: If the weather is clear, <a href="https://www.google.com/maps/search/Lake+Tekapo" target="_blank" class="map-link">Lake Tekapo</a> or <a href="https://www.google.com/maps/search/Mount+Cook+National+Kaikoura" target="_blank" class="map-link">Mount Cook</a> area are excellent spots for stargazing!</li>
+                        </ul>
+                        <h4 class="text-lg font-semibold text-stone-700 mb-2">Accommodation:</h4>
+                        <p class="mb-3">Campsite near <a href="https://www.google.com/maps/search/Lake+Tekapo" target="_blank" class="map-link">Lake Tekapo</a> or <a href="https://www.google.com/maps/search/Mount+Cook+National+Kaikoura" target="_blank" class="map-link">Mount Cook</a>.</p>
+                    `,
+                    `
+                        <h4 class="text-lg font-semibold text-stone-700 mb-2">Main Activities:</h4>
+                        <ul class="list-disc list-inside space-y-1 mb-3">
+                            <li>Morning: Take a short hike in <a href="https://www.google.com/maps/search/Mount+Cook+National+Park" target="_blank" class="map-link">Mount Cook National Park</a> (e.g., Hooker Valley Track) to admire the glaciers and mountain scenery.</li>
+                            <li>Noon: Depart from <a href="https://www.google.com/maps/search/Mount+Cook+National+Park" target="_blank" class="map-link">Mount Cook</a> area, heading directly to <a href="https://www.google.com/maps/search/Queenstown" target="_blank" class="map-link">Queenstown</a>, New Zealand's adventure capital!</li>
+                            <li>Afternoon: Arrive in <a href="https://www.google.com/maps/search/Queenstown" target="_blank" class="map-link">Queenstown</a>, check into a campsite, and soak in the vibrant atmosphere of the city!</li>
+                        </ul>
+                        <h4 class="text-lg font-semibold text-stone-700 mb-2">Accommodation:</h4>
+                        <p class="mb-3"><a href="https://www.google.com/maps/search/Queenstown" target="_blank" class="map-link">皇后鎮</a> 露營地或假日公園。</p>
+                    `,
+                    `
+                        <h4 class="text-lg font-semibold text-stone-700 mb-2">Main Activities:</h4>
+                        <p class="mb-3">Today is the day to challenge your limits! Go bungy jumping!</p>
+                        <ul class="list-disc list-inside space-y-1 mb-3">
+                            <li><a href="https://www.google.com/maps/search/Kawarau+Bridge+Bungy" target="_blank" class="map-link">Kawarau Bridge Bungy</a>: The world's first commercial bungy jumping site. Price: Approx. USD $192.00 for adults.</li>
+                            <li><a href="https://www.google.com/maps/search/Nevis+Bungy" target="_blank" class="map-link">Nevis Bungy</a>: New Zealand's highest! Price: Approx. USD $237.00 for adults.</li>
+                            <li><a href="https://www.bungy.co.nz/queenstown/" target="_blank" class="booking-link text-sm">Book Bungy</a></li>
+                        </ul>
+                        <p class="mb-3">Afternoon: Besides bungy jumping, <a href="https://www.google.com/maps/search/Queenstown" target="_blank" class="map-link">Queenstown</a> offers many other exciting activities:</p>
+                        <ul class="list-disc list-inside space-y-1 mb-3">
+                            <li>Shotover Jet: Price: Approx. USD $101.40 for adults. <a href="https://www.shotoverjet.com/" target="_blank" class="booking-link text-sm">Book Shotover Jet</a></li>
+                            <li>Paragliding: Price: Approx. USD $179.40 - $221.40 for adults. <a href="https://www.skytrek.co.nz/" target="_blank" class="booking-link text-sm">Book Paragliding</a></li>
+                            <li>Skyline Gondola & Luge: Price: Gondola approx. USD $31.20 for adults; Luge approx. USD $51.60 - $69.00 depending on rides. <a href="https://queenstown.skyline.co.nz/" target="_blank" class="booking-link text-sm">Book Skyline Gondola</a></li>
+                        </ul>
+                        <h4 class="text-lg font-semibold text-stone-700 mb-2">Accommodation:</h4>
+                        <p class="mb-3">Campsite or holiday park in <a href="https://www.google.com/maps/search/Queenstown" target="_blank" class="map-link">Queenstown</a>.</p>
+                    `,
+                    `
+                        <h4 class="text-lg font-semibold text-stone-700 mb-2">Main Activities:</h4>
+                        <ul class="list-disc list-inside space-y-1 mb-3">
+                            <li>Morning: Wake up at your leisure in <a href="https://www.google.com/maps/search/Queenstown" target="_blank" class="map-link">Queenstown</a>, or enjoy some relaxed activities.</li>
+                            <li>Noon: Drive to <a href="https://www.google.com/maps/search/Te+Anau" target="_blank" class="map-link">Te Anau</a>, the gateway town to Milford Sound.</li>
+                            <li>Afternoon: Upon arrival in <a href="https://www.google.com/maps/search/Te+Anau" target="_blank" class="map-link">Te Anau</a>, you can visit the <a href="https://www.google.com/maps/search/Te+Anau+Glowworm+Caves" target="_blank" class="map-link">Te Anau Glowworm Caves</a> to see the sparkling glowworms, or take a stroll by the lake. <br>Ticket Price: Adults approx. USD $81.00. <a href="https://www.realnz.com/en/experiences/glowworm-caves/te-anau-glowworm-caves/" target="_blank" class="booking-link text-sm">Book Glowworm Caves</a></li>
+                        </ul>
+                        <h4 class="text-lg font-semibold text-stone-700 mb-2">Accommodation:</h4>
+                        <p class="mb-3">Campsite or holiday park in <a href="https://www.google.com/maps/search/Te+Anau" target="_blank" class="map-link">Te Anau</a>.</p>
+                    `,
+                    `
+                        <h4 class="text-lg font-semibold text-stone-700 mb-2">Main Activities:</h4>
+                        <ul class="list-disc list-inside space-y-1 mb-3">
+                            <li>Morning: Depart early from <a href="https://www.google.com/maps/search/Te+Anau" target="_blank" class="map-link">Te Anau</a>, drive along the famous Milford Road to <a href="https://www.google.com/maps/search/Milford+Sound" target="_blank" class="map-link">Milford Sound</a>.</li>
+                            <li>Noon: Upon arrival at <a href="https://www.google.com/maps/search/Milford+Sound" target="_blank" class="map-link">Milford Sound</a>, take a fjord cruise. Admire the spectacular cliffs, waterfalls, and potentially spot seals and penguins! <br>Cruise ticket price: Adults approx. USD $85.80 - $105.00. <a href="https://www.southerndiscoveries.co.nz/" target="_blank" class="booking-link text-sm">Book Fjord Cruise</a></li>
+                            <li>Afternoon: After the cruise, drive back to <a href="https://www.google.com/maps/search/Te+Anau" target="_blank" class="map-link">Te Anau</a>.</li>
+                        </ul>
+                        <h4 class="text-lg font-semibold text-stone-700 mb-2">Accommodation:</h4>
+                        <p class="mb-3">Campsite or holiday park in <a href="https://www.google.com/maps/search/Te+Anau" target="_blank" class="map-link">Te Anau</a>.</p>
+                    `,
+                    `
+                        <h4 class="text-lg font-semibold text-stone-700 mb-2">Main Activities:</h4>
+                        <ul class="list-disc list-inside space-y-1 mb-3">
+                            <li>Morning: Depart from <a href="https://www.google.com/maps/search/Te+Anau" target="_blank" class="map-link">Te Anau</a>, drive to <a href="https://www.google.com/maps/search/Wanaka" target="_blank" class="map-link">Wanaka</a>. Make a brief stop in Wanaka to see <a href="https://www.google.com/maps/search/That+Wanaka+Tree" target="_blank" class="map-link">That Wanaka Tree</a>.</li>
+                            <li>Noon/Afternoon: Continue driving over Haast Pass, along the West Coast to <a href="https://www.google.com/maps/search/Franz+Josef+Glacier" target="_blank" class="map-link">Franz Josef Glacier</a> or <a href="https://www.google.com/maps/search/Fox+Glacier" target="_blank" class="map-link">Fox Glacier</a>.</li>
+                            <li>Evening: Upon arrival in the glacier region, you can choose to join a Glacier Walk or a Heli-Hike to experience the magnificent glaciers up close. <br>Heli-Hike price: Approx. USD $393.00 - $477.00. <br>
+                            <a href="https://www.franzjosefglacier.com/" target="_blank" class="booking-link text-sm mr-2">Book Franz Josef</a>
+                            <a href="https://www.foxguides.co.nz/" target="_blank" class="booking-link text-sm">Book Fox Glacier</a></li>
+                        </ul>
+                        <h4 class="text-lg font-semibold text-stone-700 mb-2">Accommodation:</h4>
+                        <p class="mb-3">Campsite or holiday park in the glacier town.</p>
+                    `,
+                    `
+                        <h4 class="text-lg font-semibold text-stone-700 mb-2">Main Activities:</h4>
+                        <ul class="list-disc list-inside space-y-1 mb-3">
+                            <li>Morning: If you didn't get enough glacier activities yesterday, you can catch up today!</li>
+                            <li>Noon/Afternoon: Depart from the glacier region, cross Arthur's Pass, and return to <a href="https://www.google.com/maps/search/Christchurch" target="_blank" class="map-link">Christchurch</a>. This route is scenic, but the mountain roads are winding, so drive carefully!</li>
+                        </ul>
+                        <h4 class="text-lg font-semibold text-stone-700 mb-2">Accommodation:</h4>
+                        <p class="mb-3"><a href="https://www.google.com/maps/search/Christchurch" target="_blank" class="map-link">基督城</a> 露營地或假日公園。</p>
+                    `,
+                    `
+                        <h4 class="text-lg font-semibold text-stone-700 mb-2">Main Activities:</h4>
+                        <ul class="list-disc list-inside space-y-1 mb-3">
+                            <li>Morning: Return the campervan at the rental drop-off point in <a href="https://www.google.com/maps/search/Christchurch" target="_blank" class="map-link">Christchurch</a>. Make sure it's clean and refueled!</li>
+                            <li>Noon/Afternoon: Head to <a href="https://www.google.com/maps/search/Christchurch+International+Airport" target="_blank" class="map-link">Christchurch International Airport (CHC)</a> and take your international flight home! Bye-bye, New Zealand!</li>
+                        </ul>
+                    `
+                ]
             }
-        ];
+        };
 
         const tabButtons = document.querySelectorAll('.tab-button');
         const sections = document.querySelectorAll('.section');
         const daySelectorContainer = document.getElementById('day-selector');
         const dailyContentContainer = document.getElementById('daily-content');
+        const langZhButton = document.getElementById('langZh');
+        const langEnButton = document.getElementById('langEn');
+
+        function updateContent() {
+            // Update header and navigation
+            document.getElementById('appTitle').textContent = translations[currentLanguage].appTitle;
+            document.getElementById('headerTitle').textContent = translations[currentLanguage].headerTitle;
+            document.getElementById('navOverview').textContent = translations[currentLanguage].navOverview;
+            document.getElementById('navDailyPlan').textContent = translations[currentLanguage].navDailyPlan;
+            document.getElementById('navBudget').textContent = translations[currentLanguage].navBudget;
+            document.getElementById('navCampervanInfo').textContent = translations[currentLanguage].navCampervanInfo;
+
+            // Update Overview section
+            document.getElementById('overviewTitle').textContent = translations[currentLanguage].overviewTitle;
+            document.getElementById('overviewText1').textContent = translations[currentLanguage].overviewText1;
+            document.getElementById('overviewText2').textContent = translations[currentLanguage].overviewText2;
+            document.getElementById('highlightsTitle').textContent = translations[currentLanguage].highlightsTitle;
+            document.getElementById('highlight1').innerHTML = translations[currentLanguage].highlight1;
+            document.getElementById('highlight2').innerHTML = translations[currentLanguage].highlight2;
+            document.getElementById('highlight3').innerHTML = translations[currentLanguage].highlight3;
+            document.getElementById('highlight4').innerHTML = translations[currentLanguage].highlight4;
+            document.getElementById('highlight5').innerHTML = translations[currentLanguage].highlight5;
+            document.getElementById('overviewCta').textContent = translations[currentLanguage].overviewCta;
+
+            // Update Daily Plan section intro
+            document.getElementById('dailyPlanTitle').textContent = translations[currentLanguage].dailyPlanTitle;
+            document.getElementById('dailyPlanIntro').textContent = translations[currentLanguage].dailyPlanIntro;
+
+            // Update Day selector buttons
+            dayButtons.forEach((button, index) => {
+                button.textContent = `${translations[currentLanguage].dayPrefix} ${itineraryData[index].day} ${translations[currentLanguage].daySuffix}`;
+            });
+
+            // Re-display current day content to update its language
+            const activeDayButton = document.querySelector('.day-button.active');
+            if (activeDayButton) {
+                const dayIndex = Array.from(dayButtons).indexOf(activeDayButton);
+                displayDayContent(itineraryData[dayIndex]);
+            } else {
+                // If no day is active, display the first day by default
+                displayDayContent(itineraryData[0]);
+                dayButtons[0].classList.add('active');
+            }
+
+
+            // Update Budget section
+            document.getElementById('budgetTitle').textContent = translations[currentLanguage].budgetTitle;
+            document.getElementById('budgetIntro1').textContent = translations[currentLanguage].budgetIntro1;
+            document.getElementById('budgetIntro2').textContent = translations[currentLanguage].budgetIntro2;
+            document.getElementById('tableHeaderActivity').textContent = translations[currentLanguage].tableHeaderActivity;
+            document.getElementById('tableHeaderPrice').textContent = translations[currentLanguage].tableHeaderPrice;
+            document.getElementById('tableHeaderBooking').textContent = translations[currentLanguage].tableHeaderBooking;
+
+            const budgetTableBody = document.getElementById('budgetTableBody');
+            budgetTableBody.innerHTML = ''; // Clear existing rows
+            budgetItems.forEach(item => {
+                const row = document.createElement('tr');
+                row.classList.add('border-b', 'border-stone-200');
+                if (item.id === 'tepuia' || item.id === 'interislander' || item.id === 'nevisBungy' || item.id === 'paragliding' || item.id === 'teanauGlowworm' || item.id === 'glacierHeliHike') {
+                    row.classList.add('bg-stone-50');
+                }
+                let bookingCellContent = '';
+                if (typeof item.bookingLink === 'object') { // For glacier heli-hike with multiple links
+                    bookingCellContent = `
+                        <a href="${item.bookingLink.franzJosef}" target="_blank" class="booking-link text-sm mr-2">${translations[currentLanguage].glacierBookingLinkFranzJosef}</a>
+                        <a href="${item.bookingLink.fox}" target="_blank" class="booking-link text-sm">${translations[currentLanguage].glacierBookingLinkFox}</a>
+                    `;
+                } else {
+                    bookingCellContent = `<a href="${item.bookingLink}" target="_blank" class="booking-link">${translations[currentLanguage].bookingLinkText}</a>`;
+                }
+
+                let activityName = currentLanguage === 'zh-Hant' ? item.zhActivity : item.enActivity;
+                let priceDisplay = item.price;
+                if (item.id === 'interislander') {
+                    priceDisplay = translations[currentLanguage].tableCellVehiclePersonCount;
+                } else if (item.id === 'skyline') {
+                    priceDisplay = `$31.20 ${translations[currentLanguage].tableCellLugePrice}`;
+                }
+
+
+                row.innerHTML = `
+                    <td class="py-3 px-4">${activityName}</td>
+                    <td class="py-3 px-4 text-right">${priceDisplay}</td>
+                    <td class="py-3 px-4">${bookingCellContent}</td>
+                `;
+                budgetTableBody.appendChild(row);
+            });
+
+            document.getElementById('totalActivityCostLabel').textContent = translations[currentLanguage].totalActivityCostLabel;
+            document.getElementById('totalActivityCostNote').textContent = translations[currentLanguage].totalActivityCostNote;
+            document.getElementById('importantNotesTitle').textContent = translations[currentLanguage].importantNotesTitle;
+            document.getElementById('note1').textContent = translations[currentLanguage].note1;
+            document.getElementById('note2').textContent = translations[currentLanguage].note2;
+            document.getElementById('note3').textContent = translations[currentLanguage].note3;
+            document.getElementById('note4').textContent = translations[currentLanguage].note4;
+
+            // Update Campervan Info section
+            document.getElementById('campervanInfoTitle').textContent = translations[currentLanguage].campervanInfoTitle;
+            document.getElementById('campervanInfoIntro').textContent = translations[currentLanguage].campervanInfoIntro;
+            document.getElementById('rentalCompaniesTitle').textContent = translations[currentLanguage].rentalCompaniesTitle;
+
+            document.getElementById('jucyTitle').textContent = translations[currentLanguage].jucyTitle;
+            document.getElementById('jucyFeature').textContent = translations[currentLanguage].jucyFeature;
+            document.getElementById('jucyPrice').textContent = translations[currentLanguage].jucyPrice;
+            document.getElementById('jucyLink').textContent = translations[currentLanguage].jucyLink;
+
+            document.getElementById('britzTitle').textContent = translations[currentLanguage].britzTitle;
+            document.getElementById('britzFeature').textContent = translations[currentLanguage].britzFeature;
+            document.getElementById('britzPrice').textContent = translations[currentLanguage].britzPrice;
+            document.getElementById('britzLink').textContent = translations[currentLanguage].britzLink;
+
+            document.getElementById('mauiTitle').textContent = translations[currentLanguage].mauiTitle;
+            document.getElementById('mauiFeature').textContent = translations[currentLanguage].mauiFeature;
+            document.getElementById('mauiPrice').textContent = translations[currentLanguage].mauiPrice;
+            document.getElementById('mauiLink').textContent = translations[currentLanguage].mauiLink;
+
+            document.getElementById('apolloTitle').textContent = translations[currentLanguage].apolloTitle;
+            document.getElementById('apolloFeature').textContent = translations[currentLanguage].apolloFeature;
+            document.getElementById('apolloPrice').textContent = translations[currentLanguage].apolloPrice;
+            document.getElementById('apolloLink').textContent = translations[currentLanguage].apolloLink;
+
+            document.getElementById('epicTitle').textContent = translations[currentLanguage].epicTitle;
+            document.getElementById('epicFeature').textContent = translations[currentLanguage].epicFeature;
+            document.getElementById('epicPrice').textContent = translations[currentLanguage].epicPrice;
+            document.getElementById('epicLink').textContent = translations[currentLanguage].epicLink;
+
+            document.getElementById('drivingTipsTitle').textContent = translations[currentLanguage].drivingTipsTitle;
+            document.getElementById('tip1').innerHTML = translations[currentLanguage].tip1;
+            document.getElementById('tip2').innerHTML = translations[currentLanguage].tip2;
+            document.getElementById('tip3').innerHTML = translations[currentLanguage].tip3;
+            document.getElementById('tip4').innerHTML = translations[currentLanguage].tip4;
+            document.getElementById('tip5').innerHTML = translations[currentLanguage].tip5;
+            document.getElementById('tip6').innerHTML = translations[currentLanguage].tip6;
+            document.getElementById('tip7').innerHTML = translations[currentLanguage].tip7;
+            document.getElementById('tip8').innerHTML = translations[currentLanguage].tip8;
+            document.getElementById('tip9').innerHTML = translations[currentLanguage].tip9;
+            
+            // Update footer
+            document.getElementById('footerText').innerHTML = translations[currentLanguage].footerText;
+        }
+
+        function switchLanguage(lang) {
+            currentLanguage = lang;
+            updateContent();
+        }
+
+        langZhButton.addEventListener('click', () => switchLanguage('zh-Hant'));
+        langEnButton.addEventListener('click', () => switchLanguage('en'));
 
         function showSection(targetId) {
             sections.forEach(section => {
@@ -509,7 +1092,7 @@
                     button.classList.remove('active');
                 }
             });
-            window.scrollTo(0, 0); // Scroll to top when section changes
+            window.scrollTo(0, 0);
         }
 
         tabButtons.forEach(button => {
@@ -521,12 +1104,12 @@
         function displayDayContent(dayData) {
             let routeLinkHtml = '';
             if (dayData.routeMapLink) {
-                routeLinkHtml = `<a href="${dayData.routeMapLink}" target="_blank" class="route-link">顯示當日地圖路線</a>`;
+                routeLinkHtml = `<a href="${dayData.routeMapLink}" target="_blank" class="route-link">${translations[currentLanguage].showRouteMap}</a>`;
             }
             dailyContentContainer.innerHTML = `
                 <div class="p-4 border border-stone-200 rounded-lg bg-stone-50">
-                    <h3 class="text-xl font-bold text-teal-600 mb-3">第 ${dayData.day} 天：${dayData.title}</h3>
-                    ${dayData.content}
+                    <h3 class="text-xl font-bold text-emerald-600 mb-3">${translations[currentLanguage].dayPrefix} ${dayData.day} ${translations[currentLanguage].daySuffix}：${translations[currentLanguage].dayTitles[dayData.day - 1]}</h3>
+                    ${translations[currentLanguage].dayContents[dayData.day - 1]}
                     ${routeLinkHtml}
                 </div>
             `;
@@ -534,10 +1117,14 @@
         
         let dayButtons = [];
 
+        // Initial content load and section display
+        updateContent();
+        showSection('overview');
+
         itineraryData.forEach((dayData, index) => {
             const dayButton = document.createElement('button');
-            dayButton.classList.add('day-button', 'py-2', 'px-4', 'border', 'border-stone-300', 'rounded-md', 'hover:bg-teal-400', 'hover:text-white', 'transition', 'duration-150', 'text-sm', 'md:text-base');
-            dayButton.textContent = `第 ${dayData.day} 天`;
+            dayButton.classList.add('day-button', 'py-2', 'px-4', 'border', 'border-stone-300', 'rounded-md', 'hover:bg-emerald-500', 'hover:text-white', 'transition', 'duration-150', 'text-sm', 'md:text-base');
+            dayButton.textContent = `${translations[currentLanguage].dayPrefix} ${dayData.day} ${translations[currentLanguage].daySuffix}`;
             dayButton.addEventListener('click', () => {
                 displayDayContent(dayData);
                 dayButtons.forEach(btn => btn.classList.remove('active'));
@@ -546,14 +1133,11 @@
             daySelectorContainer.appendChild(dayButton);
             dayButtons.push(dayButton);
 
-            if (index === 0) { // Display first day by default
+            if (index === 0) {
                 displayDayContent(dayData);
                 dayButton.classList.add('active');
             }
         });
-
-        // Show the overview section by default
-        showSection('overview');
 
     </script>
 </body>
